@@ -15,4 +15,7 @@ var distribution = [
 AuditDataMDSchema = {
   "Heating 1": heating,
   "Heating 2": heating,
+  "Distribution 1": distribution,
+  "Distribution 2": distribution,
+
 }

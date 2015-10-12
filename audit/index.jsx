@@ -9,22 +9,15 @@ AuditInput = React.createClass({
     };
   },
 
-  renderInputTable() {
-    return <table id="meta">
-      <tbody>
-      <tr>
-      <td class="meta-head">Invoice #</td>
-      <td><textarea>000123</textarea></td>
-      </tr>
-      </tbody></table>;
-  },
-
   render() {
     if (! this.data.item) {
       return <div>404: Not found</div>;
     }
     var sects = Object.keys(AuditDataMDSchema).map( i => {
-      return <AuditInputTable fields={AuditDataMDSchema[i]} section={i} />
+      return <div key={i}>
+        <h2>{i}</h2>
+      <AuditInputTable fields={AuditDataMDSchema[i]} section={i} />
+        </div>
     })
 
       return <div>
@@ -53,9 +46,9 @@ AuditInputTable = React.createClass({
 
   render() {
     var rows = this.props.fields.map((field) => {
-      return <tr>
+      return <tr key={field}>
         <td className="meta-head">{field}</td>
-        <td><textarea name={field} onChange={this.handleChange} value={this.data.item[this.props.section + "." + field]}></textarea></td>
+        <td><textarea name={field} onChange={this.handleChange} value={this.data.item[this.props.section] [field]}></textarea></td>
       </tr>;
     })
     return <table id="meta">

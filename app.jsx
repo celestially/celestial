@@ -2,6 +2,8 @@ Layout = React.createClass({
   render() {
     return (
       <div>
+        <Header/>
+
         <a href="/post/post-1">post 1 </a>
         <a href="/post/post-2">post 2 </a>
         <a href="/post/post-3">post 3 </a>

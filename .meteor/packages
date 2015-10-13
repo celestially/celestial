@@ -29,3 +29,6 @@ fourseven:scss
 twbs:bootstrap
 meteorhacks:npm
 cosmos:browserify
+
+
+npm-container

@@ -1,7 +1,8 @@
 Nav = React.createClass({
   render() {
     return (
-        <nav className="navbar navbar-default" role="navigation">
+      <div className="sidebar-nav">
+        <div className="navbar navbar-default" role="navigation">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
               <span className="sr-only">Toggle navigation</span>
@@ -46,7 +47,8 @@ Nav = React.createClass({
                 </li>
               </ul>
             </div>
-          </nav>
+          </div>
+        </div>
     );
   }
 });

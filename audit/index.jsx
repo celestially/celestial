@@ -4,8 +4,9 @@ AuditInput = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
+    console.log('id: ' + this.props.params.slug)
     return {
-      item: Audits.findOne({ slug: this.props.params.slug })
+      item: Audits.findOne({ _id: this.props.params.slug })
     };
   },
 
@@ -16,13 +17,13 @@ AuditInput = React.createClass({
     var sects = Object.keys(AuditDataMDSchema).map( i => {
       return <div key={i}>
         <h2>{i}</h2>
-      <AuditInputTable fields={AuditDataMDSchema[i]} section={i} />
-        </div>
+        <AuditInputTable fields={AuditDataMDSchema[i]} section={i} />
+      </div>
     })
 
-      return <div>
+    return <div>
       Audit: {this.data.item.title}
-        {sects}
+      {sects}
 
     </div>;
   }

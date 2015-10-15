@@ -1,4 +1,4 @@
-var ace = brace;
+//var ace = brace;
 
 ReactAce = React.createClass({
   displayName: 'ReactAce',

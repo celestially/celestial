@@ -11,6 +11,7 @@ boilerplate-generator@1.0.4
 caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
+celestial:grid@0.0.1
 check@1.0.6
 coffeescript@1.0.10
 cosmos:browserify@0.5.1
@@ -70,7 +71,6 @@ standard-minifiers@1.0.1
 templating@1.1.4
 templating-tools@1.0.0
 tracker@1.0.9
-twbs:bootstrap@3.3.5
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5

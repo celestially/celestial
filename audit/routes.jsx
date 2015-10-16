@@ -9,9 +9,21 @@
 //});
 
 
+function renderForm(section) {
+  return React.createClass({
+    render() {
+      return <AuditInput schema={section} {...this.props} />
+    }
+  })
+};
+
+
+
 Reaktor.init(
   <Router>
-    <Route path="/a2" layout={Layout2} content={AuditList} />
-    <Route path="/a2/audit2" layout={Layout2} content={AuditList} />
+    <Route path="/audit" layout={Layout2} content={AuditList} />
+    <Route path="/audit/main" layout={Layout2} content={AuditInput} />
+    <Route path="/audit/MD" layout={Layout2} content={renderForm(AuditDataMDSchema)} />
+    <Route path="/audit/DC" layout={Layout2} content={renderForm(AuditDataDCSchema)} />
   </Router>
 );

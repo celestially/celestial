@@ -1,6 +1,4 @@
 
-console.log("SpreadsheetComponent start")
-
 RowComponent = React.createClass({
     /**
      * React Render method

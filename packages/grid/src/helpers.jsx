@@ -1,4 +1,3 @@
-console.log("SpreadsheetComponent start")
 
 Helpers = {
     /**

@@ -1,6 +1,4 @@
 
-console.log("SpreadsheetComponent start")
-
 Spreadsheet = React.createClass({
     spreadsheetId: null,
 
@@ -8,7 +6,6 @@ Spreadsheet = React.createClass({
      * React 'getInitialState' method
      */
     getInitialState: function() {
-        console.log("SpreadsheetComponent getInitialState")
 
         var initialData = this.props.initialData || {};
 
@@ -58,7 +55,8 @@ Spreadsheet = React.createClass({
             _cellClasses = this.props.cellClasses,
             rows = [], key, i, cellClasses;
 
-        this.spreadsheetId = this.spreadsheetId || Helpers.makeSpreadsheetId();
+        //this.spreadsheetId = this.spreadsheetId || ;
+        this.spreadsheetId = this.spreadsheetId || this.props.spreadsheetId || Helpers.makeSpreadsheetId();
 
         // Sanity checks
         if (!data.rows && !config.rows) {
@@ -172,6 +170,7 @@ Spreadsheet = React.createClass({
         // Only traverse the table if the user isn't editing a cell,
         // unless override is given
         if (!inEdit && this.state.editing) {
+            console.log('not in edit')
             return false;
         }
 
@@ -203,6 +202,10 @@ Spreadsheet = React.createClass({
         }
 
         if (target.length > 0) {
+            target.click();
+        } else if (!this.props.config.canAddColumn && direction === 'right') {
+            console.log('go next row')
+            target = $origin.closest('tr').next().children().eq(0).find('span');
             target.click();
         } else {
             this.extendTable(direction, originCell);

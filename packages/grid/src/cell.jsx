@@ -1,4 +1,3 @@
-console.log("SpreadsheetComponent start 1")
 
 CellComponent = React.createClass({
 

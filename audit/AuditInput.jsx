@@ -20,6 +20,7 @@ AuditInput = React.createClass({
     //  return <a href='#'>{it[0]}</a>
     //})
 
+    console.log('schema: ' +JSON.stringify(this.props.schema,2));
     var sects = Object.keys(this.props.schema).map( i => {
       return <div key={i}>
         <h2>{i}</h2>

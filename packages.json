@@ -1,2 +1,4 @@
 {
+  "material-ui": "0.12.3",
+  "externalify": "0.1.0"
 }

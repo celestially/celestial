@@ -12,6 +12,7 @@
 function renderForm(section) {
   return React.createClass({
     render() {
+      console.log('section: ' + section);
       return <AuditInput schema={section} {...this.props} />
     }
   })

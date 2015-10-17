@@ -1,4 +1,5 @@
 var heating = [
+  'Fuel Type3',
   'Fuel Type',
   'System Type',
   'System Age (Years)',

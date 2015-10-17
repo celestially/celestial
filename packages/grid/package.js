@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.0.2');
-  api.use(['ecmascript', 'react@0.1.13', 'jquery']);
+  api.use(['ecmascript@0.1.4', 'react@0.1.13', 'jquery']);
   api.addFiles('grid.js');
   api.addFiles([
       'src/cell.jsx',

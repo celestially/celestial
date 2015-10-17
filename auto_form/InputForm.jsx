@@ -40,10 +40,13 @@ InputTable = React.createClass({
   },
 
   render() {
+    console.log('this.data.item: ' + JSON.stringify(this.data.item));
+    console.log('this.props.section: ' + this.props.section);
+    var sectionArr = this.data.item[this.props.section] || [];
     var rows = this.props.fields.map((field) => {
       return <tr key={field}>
         <td className="meta-head">{field}</td>
-        <td><textarea name={field} onChange={this.handleChange} value={this.data.item[this.props.section] [field]}></textarea></td>
+        <td><textarea name={field} onChange={this.handleChange} value={sectionArr[field]}></textarea></td>
       </tr>;
     })
     return <table id="meta">

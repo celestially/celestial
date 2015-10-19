@@ -26,9 +26,8 @@ ejson
 spacebars
 check
 fourseven:scss
-nemo64:bootstrap
-less
 meteorhacks:npm
 cosmos:browserify
 
-celestial:grid
+
+npm-container

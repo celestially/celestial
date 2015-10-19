@@ -26,5 +26,6 @@ Reaktor.init(
     <Route path="/audit/main" layout={Layout2} content={AuditInput} />
     <Route path="/audit/MD" layout={Layout2} content={renderForm(AuditDataMDSchema)} />
     <Route path="/audit/DC" layout={Layout2} content={renderForm(AuditDataDCSchema)} />
+    <Route path="/audit/report" layout={Layout2} content={AuditRecommendations} />
   </Router>
 );

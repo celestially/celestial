@@ -30,6 +30,11 @@ convertArrayofArraysToObjectOfObjects = function(arr) {
   return result;
 }
 
+replaceAll = function(str, find, replace) {
+  //var find = ;
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
 const test = [
   ['shape', 'color', 'pattern'],
   ['square', 'green', 'dots'],
@@ -37,3 +42,7 @@ const test = [
 ]
 var res = convertArrayofArraysToObjectOfObjects(test)
 console.log('test: ' + JSON.stringify(res));
+
+
+console.log('test replaceAll: ' + replaceAll('this. is. a. test', '\\.', ''));
+

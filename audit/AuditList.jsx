@@ -31,8 +31,7 @@ AuditList = React.createClass({
       <h3>{this.data.items.length} Audits found</h3>
       <input type='button'
              onClick={this.newAudit}
-        value='Create New Audit'>
-        </input>
+        value='Create New Audit' />
       <hr />
     <ul className="list-group" >
       {items}

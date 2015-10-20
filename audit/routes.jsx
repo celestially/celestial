@@ -50,7 +50,7 @@ function renderForm(schema, section) {
 }
 
 const auditRoutes = [
-  ['path', 'name', 'content'],
+  ['path', 'name', 'content', 'label'],
   ['/:id/Main', 'Main', renderForm(AuditMainSchema)],
   ['/:id/MD', 'MD', renderForm(AuditDataMDSchema), 'MD Data'],
   ['/:id/DC', 'DC', renderForm(AuditDataDCSchema)],
@@ -73,6 +73,5 @@ const routes = objs.map(route => {
 Reaktor.init(
   <Router>
     {routes}
-    <Route path="/audit/list" layout={Layout2} content={AuditList}/>
   </Router>);
 

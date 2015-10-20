@@ -8,7 +8,7 @@ AuditList = React.createClass({
   },
 
   newAudit() {
-    alert("new audit!")
+    Audits.insert({name: "New Audit"});
   },
 
   editAudit() {
@@ -19,13 +19,17 @@ AuditList = React.createClass({
       return <li className="list-group-item"
                  onClick={this.editAudit.bind(i._id)}>
         <a href={"/audit/" + i._id}>
-        Audit: {i.title} {i._id}
+        Audit: {i.name} {i._id}
           </a>
         </li>
     })
 
+    console.log('this.props.params: ' + JSON.stringify(this.props.params));
+
     return <div>
-      <h2 onClick={this.newAudit}>New Audit</h2>
+      <input type='button'
+             onClick={this.newAudit}>
+        New Audit</input>
     <ul className="list-group" >
       Audits ({this.data.items.length})
       {items}

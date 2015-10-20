@@ -9,3 +9,8 @@
 .green {
     background: lightgreen;
 }
+
+.nav-cell {
+    left: 15px;
+    padding-right: 15px;
+}

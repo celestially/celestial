@@ -27,6 +27,9 @@ const attic_issues = [
 'There is insufficient insulation and it is very gappy and not working to capacity.',
 ]
 
+const kw_issues = []
+
+
 const reportSchemaArray = [
   ['name', 'recs'],
   ['crawlspace', crawlspaceRecs],
@@ -34,6 +37,7 @@ const reportSchemaArray = [
 ];
 
 //sanitize strings, remove dots
+//TODO: is this ok as const?
 reportSchemaArray.map( row => {
   for (var i = 0; i < row[1].length; i++) {
     row[1][i] = replaceAll(row[1][i], '\\.', '');
@@ -41,4 +45,4 @@ reportSchemaArray.map( row => {
   }
 });
 
-ReportSections = convertToObjectOfObjects(reportSchemaArray);
+ReportSchema = convertToObjectOfObjects(reportSchemaArray);

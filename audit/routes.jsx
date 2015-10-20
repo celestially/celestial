@@ -17,12 +17,18 @@ function withAudit(Component, section) {
     getMeteorData() {
       console.log('id: ' + this.props.params.id)
       return {
-        //item: Audits.findOne({ _id: this.props.params.slug })
-        item: Audits.findOne()
+        item: Audits.findOne({ _id: this.props.params.id })
+        //item: Audits.findOne()
       };
     },
 
     render() {
+      if (! this.data.item) {
+        return <div>404: Not found</div>;
+      }
+
+      console.log('this.data.item: ' + JSON.stringify(this.data.item));
+
       return <div>
         {getNavItems(this.props.params.id, section, AuditSchema, objs)}
         <Component item={this.data.item} collection={Audits} {...this.props} />
@@ -44,10 +50,11 @@ function renderForm(schema, section) {
 
 const auditRoutes = [
   ['path', 'name', 'content'],
-  ['/:id/main', 'main', withAudit(renderForm(AuditMainSchema), 'main')],
-  ['/:id/MD', 'MD', withAudit(renderForm(AuditDataMDSchema), 'MD')],
-  ['/:id/DC', 'DC', withAudit(renderForm(AuditDataDCSchema), 'DC')],
-  ['/:id/report', 'report', withAudit(AuditReport, 'report')],
+  ['/:id/Main', 'Main', renderForm(AuditMainSchema)],
+  ['/:id/MD', 'MD', renderForm(AuditDataMDSchema)],
+  ['/:id/DC', 'DC', renderForm(AuditDataDCSchema)],
+  ['/:id/ReportSections', 'ReportSections', AuditReport],
+  ['/:id/ReportPreview', 'ReportPreview', ReportComponent],
 ];
 
 const objs = convertToArrayOfObjects(auditRoutes);
@@ -58,7 +65,7 @@ const routes = objs.map(route => {
   console.log('route.n: ' + route.name);
   return <Route path={'/audit' + route.path}
                 layout={Layout2}
-                content={route.content}
+                content={withAudit(route.content,route.name)}
     />
 })
 

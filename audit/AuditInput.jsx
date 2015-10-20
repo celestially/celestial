@@ -1,17 +1,8 @@
 
 AuditInput = React.createClass({
-  mixins: [ReactMeteorData],
-
-  getMeteorData() {
-    console.log('id: ' + this.props.params.slug)
-    return {
-      //item: Audits.findOne({ _id: this.props.params.slug })
-      item: Audits.findOne()
-    };
-  },
 
   render() {
-    if (! this.data.item) {
+    if (! this.props.item) {
       return <div>404: Not found</div>;
     }
     //console.log('schema: ' +JSON.stringify(this.props.schema,2));

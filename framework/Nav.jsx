@@ -1,9 +1,9 @@
 getNavItems = function(id, section, schema, objs) {
   const navs = objs.map(route => {
     let item
-    console.log('NI section: ' + section);
-    console.log('NI route.name: ' + route.name);
-    console.log('NI schema.singularName: ' + schema.singularName);
+    //console.log('NI section: ' + section);
+    //console.log('NI route.name: ' + route.name);
+    //console.log('NI schema.singularName: ' + schema.singularName);
     if (section == route.name) {
       item = (<div className='col-xs-3 orange'>
         {section}

@@ -24,13 +24,6 @@
 
 
 InputTable = React.createClass({
-  mixins: [ReactMeteorData],
-
-  getMeteorData() {
-    return {
-      item: this.props.collection.findOne()
-    };
-  },
 
   handleChange(e) {
     console.log('change: ' + e.target.name + ", " + e.target.value);

@@ -1,6 +1,6 @@
 AuditReport = React.createClass({
   render() {
-    return <AuditRecommendationsImpl sections={ReportSections} {...this.props} />
+    return <AuditRecommendationsImpl sections={ReportSchema} {...this.props} />
   }
 });
 
@@ -25,9 +25,10 @@ AuditRecommendationsImpl = React.createClass({
 
   handleRecChange(e) {
     console.log('change: ' + e.target.name + ", " + e.target.value, ', ' + e.target.checked);
+    let obj = {}
     let key = replaceAll(e.target.name, '\\.', '')
     obj['report.' + this.state.section + '.recs.' + key + '.display'] = e.target.checked
-    Audits.update(this.data.item._id, {"$set" : obj})
+    Audits.update(this.props.item._id, {"$set" : obj})
   },
 
   renderSections(checkedData) {

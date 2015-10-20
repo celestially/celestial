@@ -17,8 +17,10 @@ AuditList = React.createClass({
   render() {
     var items = this.data.items.map( i => {
       return <li className="list-group-item" onClick={this.editAudit.bind(i._id)}>
-        <a href={'/audit/' + i._id + '/main'}>
-        Audit: {i.name} {i._id}
+        <a href={'/audit/' + i._id + '/main'}
+           className="tooltip"
+        >
+          Audit: {i.name}
           </a>
         </li>
     })

@@ -30,17 +30,8 @@ function withAudit(Component, section) {
       console.log('this.data.item: ' + JSON.stringify(this.data.item));
 
       return <div>
-        {getNavItems(this.props.params.id, section, AuditSchema, objs)}
-        <a href="#openModal">Debug View</a>
+        {getNavItems(this.props.params.id, section, AuditSchema, objs, this.data.item)}
 
-        <div id="openModal" className="modalDialog">
-          <div>	<a href="#close" title="Close" class="close">X</a>
-            ReportSchemaArray
-            <pre>{JSON.stringify(ReportSchemaArray, null, 4)}</pre>
-            Item:
-            <pre>{JSON.stringify(this.data.item, null, 4)}</pre>
-          </div>
-        </div>
         <Component item={this.data.item} collection={Audits} {...this.props} />
       </div>
     }
@@ -61,7 +52,7 @@ function renderForm(schema, section) {
 const auditRoutes = [
   ['path', 'name', 'content'],
   ['/:id/Main', 'Main', renderForm(AuditMainSchema)],
-  ['/:id/MD', 'MD', renderForm(AuditDataMDSchema)],
+  ['/:id/MD', 'MD', renderForm(AuditDataMDSchema), 'MD Data'],
   ['/:id/DC', 'DC', renderForm(AuditDataDCSchema)],
   ['/:id/ReportSections', 'ReportSections', AuditReport],
   ['/:id/ReportPreview', 'ReportPreview', ReportComponent],

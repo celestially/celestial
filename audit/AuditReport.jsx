@@ -86,6 +86,7 @@ AuditRecommendationsImpl = React.createClass({
             onChange={this.handleSectionChange}
             checked={checkedData[section] && checkedData[section].display} />
             show in report </span>
+          <hr/>
 
           {recs.map((it, i) => {
             return <div key={i}>

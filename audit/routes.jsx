@@ -24,9 +24,7 @@ function withAudit(Component, section) {
 
     render() {
       return <div>
-        <div className='row'>
-          {getNavItems(this.props.params.id, section)}
-        </div>
+        {getNavItems(this.props.params.id, section, AuditSchema, objs)}
         <Component item={this.data.item} collection={Audits} {...this.props} />
       </div>
     }
@@ -46,32 +44,13 @@ function renderForm(schema, section) {
 
 const auditRoutes = [
   ['path', 'name', 'content'],
-  ['/list', 'list', AuditList],
+  ['/:id/main', 'main', withAudit(renderForm(AuditMainSchema), 'main')],
   ['/:id/MD', 'MD', withAudit(renderForm(AuditDataMDSchema), 'MD')],
   ['/:id/DC', 'DC', withAudit(renderForm(AuditDataDCSchema), 'DC')],
-  ['/:id/report', 'report', withAudit(AuditReport)],
+  ['/:id/report', 'report', withAudit(AuditReport, 'report')],
 ];
 
 const objs = convertToArrayOfObjects(auditRoutes);
-
-function getNavItems(id, section) {
-  const navs = objs.map(route => {
-    let item
-    if (section == route.name) {
-      item = section
-    } else {
-      item = <a href={'/audit/' + id + '/' + route.name}>{route.name}</a>
-    }
-    console.log('NI route: ' + JSON.stringify(route));
-    return <div className='col-xs-3'>
-      {item}
-    </div>
-  })
-  return <div className='row'>
-    {navs}
-    <hr/>
-  </div>
-}
 
 const routes = objs.map(route => {
   console.log('route: ' + JSON.stringify(route));
@@ -86,6 +65,6 @@ const routes = objs.map(route => {
 Reaktor.init(
   <Router>
     {routes}
-    <Route path="/audit/list" layout={Layout2} content={AuditList} />
+    <Route path="/audit/list" layout={Layout2} content={AuditList}/>
   </Router>);
 

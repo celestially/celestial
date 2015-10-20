@@ -33,6 +33,7 @@ const reportSchemaArray = [
   ['attic', attic_issues],
 ];
 
+//sanitize strings, remove dots
 reportSchemaArray.map( row => {
   for (var i = 0; i < row[1].length; i++) {
     row[1][i] = replaceAll(row[1][i], '\\.', '');

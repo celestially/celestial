@@ -1,4 +1,3 @@
-Audits = new Mongo.Collection('audit');
 
 AuditInput = React.createClass({
   mixins: [ReactMeteorData],
@@ -24,7 +23,6 @@ AuditInput = React.createClass({
     })
 
     return <div>
-      //Audit: {this.data.item.title}
       {sects}
     </div>;
   }

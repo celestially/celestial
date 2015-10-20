@@ -1,3 +1,5 @@
+Audits = new Mongo.Collection('audit');
+
 Layout2 = React.createClass({
   render() {
     return (
@@ -8,4 +10,11 @@ Layout2 = React.createClass({
     );
   }
 });
+
+AuditSchema = {
+  singularName: 'Audit',
+  pluralName: 'Audits',
+  collection: Audits,
+  layout: Layout2
+}
 

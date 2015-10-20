@@ -16,8 +16,7 @@ AuditList = React.createClass({
 
   render() {
     var items = this.data.items.map( i => {
-      return <li className="list-group-item"
-                 onClick={this.editAudit.bind(i._id)}>
+      return <li className="list-group-item" onClick={this.editAudit.bind(i._id)}>
         <a href={'/audit/' + i._id + '/MD'}>
         Audit: {i.name} {i._id}
           </a>
@@ -27,11 +26,13 @@ AuditList = React.createClass({
     console.log('this.props.params: ' + JSON.stringify(this.props.params));
 
     return <div>
+      <h3>{this.data.items.length} Audits found</h3>
       <input type='button'
-             onClick={this.newAudit}>
-        New Audit</input>
+             onClick={this.newAudit}
+        value='New Audit'>
+        Create New</input>
+      <hr />
     <ul className="list-group" >
-      Audits ({this.data.items.length})
       {items}
     </ul>
       </div>

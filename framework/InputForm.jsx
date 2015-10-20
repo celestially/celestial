@@ -40,8 +40,8 @@ InputTable = React.createClass({
   },
 
   render() {
-    console.log('this.data.item: ' + JSON.stringify(this.data.item));
-    console.log('this.props.section: ' + this.props.section);
+    //console.log('this.data.item: ' + JSON.stringify(this.data.item));
+    //console.log('this.props.section: ' + this.props.section);
     var sectionArr = this.data.item[this.props.section] || [];
     var rows = this.props.fields.map((field) => {
       return <tr key={field}>

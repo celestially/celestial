@@ -31,6 +31,16 @@ function withAudit(Component, section) {
 
       return <div>
         {getNavItems(this.props.params.id, section, AuditSchema, objs)}
+        <a href="#openModal">Debug View</a>
+
+        <div id="openModal" className="modalDialog">
+          <div>	<a href="#close" title="Close" class="close">X</a>
+            ReportSchemaArray
+            <pre>{JSON.stringify(ReportSchemaArray, null, 4)}</pre>
+            Item:
+            <pre>{JSON.stringify(this.data.item, null, 4)}</pre>
+          </div>
+        </div>
         <Component item={this.data.item} collection={Audits} {...this.props} />
       </div>
     }

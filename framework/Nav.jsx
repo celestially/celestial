@@ -5,12 +5,12 @@ getNavItems = function(id, section, schema, objs) {
     //console.log('NI route.name: ' + route.name);
     //console.log('NI schema.singularName: ' + schema.singularName);
     if (section == route.name) {
-      item = (<div className='col-xs-3 orange'>
+      item = (<div className='nav-cell orange'>
         {section}
       </div>)
 
     } else {
-      item = (<div className='col-xs-3'>
+      item = (<div className='nav-cell'>
         <a href={'/' + schema.singularName + '/' + id + '/' + route.name}>
           {route.name}</a>
       </div>)

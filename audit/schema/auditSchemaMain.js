@@ -7,12 +7,12 @@ const custData = [
 ];
 
 const appliances = [
-  'test',
+  'example field',
 ];
 
 AuditMainSchema = {
   'Customer Info': custData,
-  'Appliances': appliances,
+  'Audit Details': appliances,
 }
 
 

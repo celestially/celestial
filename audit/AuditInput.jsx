@@ -9,7 +9,7 @@ AuditInput = React.createClass({
     var sects = Object.keys(this.props.schema).map( i => {
       return <div key={i}>
         <h2>{i}</h2>
-        <InputTable collection={Audits} fields={this.props.schema[i]} section={i} />
+        <InputTable collection={Audits} fields={this.props.schema[i]} section={i} {...this.props} />
       </div>
     })
 

@@ -12,19 +12,24 @@ ReportSection = React.createClass({
 ReportComponent = React.createClass({
 
   renderHeading() {
+    //console.log('this.props.item: ' + JSON.stringify(this.props.item));
+    let custInfo = this.props.item['Customer Info']
+    console.log('this.props.item: ' + JSON.stringify(this.props.item['Customer Info']));
     return (
       <div>
         <h2>Report Preview</h2>
-        For: {this.props.item.name}
-        For: {this.props.item.address}
-        For: {this.props.item.phone}
+        For: {custInfo.Name}
+        For: {custInfo.address}
+        For: {custInfo.phone}
         {this.props.content}
       </div>
     );
   },
 
   renderSections() {
-    return ReportSchema.map((section) => {
+    //console.log(': ' + );
+    return ReportSchemaArray.map((section) => {
+      console.log('section: ' + JSON.stringify(section));
       return(
         <div>
           <h3>{section.name}</h3>
@@ -37,8 +42,8 @@ ReportComponent = React.createClass({
   render() {
     return (
       <div>
-        {renderHeading()}
-        {renderSections()}
+        {this.renderHeading()}
+        {this.renderSections()}
       </div>
     );
   }

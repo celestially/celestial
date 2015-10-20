@@ -27,11 +27,15 @@ const attic_issues = [
 'There is insufficient insulation and it is very gappy and not working to capacity.',
 ]
 
-const kw_issues = []
+const kw_issues = [
+  'one',
+  'two'
+]
 
 
 const reportSchemaArray = [
   ['name', 'recs'],
+  ['kw', kw_issues],
   ['crawlspace', crawlspaceRecs],
   ['attic', attic_issues],
 ];
@@ -46,3 +50,4 @@ reportSchemaArray.map( row => {
 });
 
 ReportSchema = convertToObjectOfObjects(reportSchemaArray);
+ReportSchemaArray = convertToArrayOfObjects(reportSchemaArray);

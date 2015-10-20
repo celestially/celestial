@@ -17,5 +17,4 @@ AuditDataMDSchema = {
   "Heating 2": heating,
   "Distribution 1": distribution,
   "Distribution 2": distribution,
-
 }

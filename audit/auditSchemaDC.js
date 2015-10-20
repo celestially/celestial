@@ -31,7 +31,6 @@ AuditDataDCSchema = {
   'Heating 2': heating,
   'Appliances': appliances,
   'Appliance Condition': appliance_condition,
-  
 }
 
 

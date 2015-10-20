@@ -1,5 +1,4 @@
 
-
 const crawlspaceRecs = [
   'Install 2 to 3 vents to the outside of the house.',
   'Airseal all penetrations going to the house from the crawlspace.',
@@ -41,4 +40,4 @@ reportSchemaArray.map( row => {
   }
 });
 
-ReportSections = convertArrayofArraysToObjectOfObjects(reportSchemaArray);
+ReportSections = convertToObjectOfObjects(reportSchemaArray);

@@ -1,4 +1,4 @@
-function convertArrayofArraysToArrayOfObjects(arr) {
+convertToArrayOfObjects= function(arr) {
   var result = []
   var keyRow = arr[0]
   arr.splice(0,1)
@@ -12,7 +12,7 @@ function convertArrayofArraysToArrayOfObjects(arr) {
   return result;
 }
 
-convertArrayofArraysToObjectOfObjects = function(arr) {
+convertToObjectOfObjects = function(arr) {
   var result = {}
   var keyRow = arr[0]
   keyRow.splice(0,1)
@@ -40,7 +40,7 @@ const test = [
   ['square', 'green', 'dots'],
   ['circle', 'red', 'lines'],
 ]
-var res = convertArrayofArraysToObjectOfObjects(test)
+var res = convertToObjectOfObjects(test)
 console.log('test: ' + JSON.stringify(res));
 
 

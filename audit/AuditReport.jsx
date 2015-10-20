@@ -1,29 +1,8 @@
-AuditRecommendations = React.createClass({
+AuditReport = React.createClass({
   render() {
     return <AuditRecommendationsImpl sections={ReportSections} {...this.props} />
   }
 });
-
-//AuditReportSections = React.createClass({
-//
-//  render() {
-//    const sectionKeys = Object.keys(this.props.sections);
-//
-//    console.log('sectionKeys: ' + JSON.stringify(sectionKeys));
-//    console.log('state: ' + JSON.stringify(this.state));
-//
-//
-//    return <div className='reportSections orange'>
-//      { sectionKeys.map((it, i) => {
-//        return <div key={i}>
-//          <input type='checkbox'></input>
-//          <a href='#' onClick={this.props.changeSection(it)}>{it}</a>
-//        </div>
-//      })}
-//    </div>
-//
-//  }
-//});
 
 AuditRecommendationsImpl = React.createClass({
 

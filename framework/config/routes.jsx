@@ -1,5 +1,5 @@
 
-function withSchema(Component, section) {
+withSchema = function(Component, section) {
   return React.createClass({
     mixins: [ReactMeteorData],
 

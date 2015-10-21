@@ -15,6 +15,9 @@ TopNav = React.createClass({
           <div className='nav-cell'>
             <a href='/schema/list'>Schemas</a>
           </div>
+          <div className='nav-cell'>
+            <a href='/config'>Config</a>
+          </div>
         </div>
         <hr />
       </div>

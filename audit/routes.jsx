@@ -53,9 +53,10 @@ const auditRoutes = [
   ['path', 'name', 'content', 'label'],
   ['/:id/Main', 'Main', renderForm(AuditMainSchema)],
   ['/:id/MD', 'MD', renderForm(AuditDataMDSchema), 'MD Data'],
-  ['/:id/DC', 'DC', renderForm(AuditDataDCSchema)],
+  ['/:id/DC', 'DC', renderForm(AuditDataDCSchema), 'DC Data'],
   ['/:id/ReportSections', 'ReportSections', AuditReport],
   ['/:id/ReportPreview', 'ReportPreview', ReportComponent],
+  ['/:id/RecsData', 'RecsData', ReportComponent],
 ];
 
 const objs = convertToArrayOfObjects(auditRoutes);

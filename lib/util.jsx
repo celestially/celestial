@@ -46,9 +46,9 @@ replaceAll = function(str, find, replace) {
 //console.log('test replaceAll: ' + replaceAll('this. is. a. test', '\\.', ''));
 
 
-var s = '/schema/:id/NewSchemaKey';
-console.log('replace: ' + s.replace(':id', 'foo'));
-
-var a = 5;
-var b = 10;
-console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);
+//var s = '/schema/:id/NewSchemaKey';
+//console.log('replace: ' + s.replace(':id', 'foo'));
+//
+//var a = 5;
+//var b = 10;
+//console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);

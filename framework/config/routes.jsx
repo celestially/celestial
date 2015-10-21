@@ -16,7 +16,7 @@ withSchema = function(Component, section) {
         return <div>404: Not found</div>;
       }
 
-      console.log('this.data.item: ' + JSON.stringify(this.data.item));
+      //console.log('this.data.item: ' + JSON.stringify(this.data.item));
 
       //{getNavItems(this.props.params.id, section, SchemaSchema, objs, this.data.item)}
 

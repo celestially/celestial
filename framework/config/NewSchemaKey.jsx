@@ -12,28 +12,79 @@ NewSchemaKey = React.createClass({
 
   changeKey(name) {
     console.log('go to name: ' + name);
-    this.setState({selectedKey: name})
+    this.setState({
+      selectedKey: name,
+      selectedValue: this.props.item[name],
+      oldKey: name
+    })
   },
 
   insertKey() {
-    console.log('newKey: ' + this.state.newKey);
+    console.log('insertKey: ' + this.state.newKey);
     let obj = {}
-    obj[this.state.newKey] = 'test'
+    obj[this.state.newKey] = ''
     Schemas.update(this.props.item._id, {"$set": obj})
+    changeKey(this.state.newKey)
+  },
+
+  updateKey() {
+    console.log('updateKey: ' + this.state.selectedKey);
+    let obj = {}
+    obj[this.state.oldKey] = this.state.selectedKey
+    Schemas.update(this.props.item._id, {"$rename": obj})
+  },
+
+  deleteKey() {
+    console.log('deleteKey: ' + this.state.selectedKey);
+    let obj = {}
+    obj[this.state.selectedKey] = ''
+    Schemas.update(this.props.item._id, {"$unset": obj})
   },
 
   updateValue() {
-    console.log('selectedKey: ' + this.state.selectedKey);
+    const selKey = this.state.selectedKey
+    console.log('updateValue: ' + this.state.selectedKey);
     let obj = {}
-    obj[this.state.selectedKey] = this.state.selectedValue
+    obj[selKey] = this.state.selectedValue
     Schemas.update(this.props.item._id, {"$set": obj})
+
+    //convert to array
+    const prefix = selKey.split(':')[0]
+    let converted = this.state.selectedValue.split("\n");
+    result = [];
+    converted.map( (line, i) => {
+      line = replaceAll(line, '\\.', '')
+      line = replaceAll(line, '\t', '')
+      line = replaceAll(line, '•', '')
+      line = line.replace(/^\s+|\s+$/g, '')
+      if (line.length>0) {
+        result.push([prefix+'-'+(i+1), line])
+      }
+    })
+    //console.log('converted: ' + converted);
+    this.setState({converted: result})
+    //save converted value
+    obj = {}
+    obj['_result.' + selKey] = result
+    Schemas.update(this.props.item._id, {"$set": obj})
+
   },
 
   convert() {
-
-    const converted = this.state.selectedValue.split("\n");
-    console.log('converted: ' + converted);
-    this.setState({converted: converted})
+    let converted = this.state.selectedValue.split("\n");
+    result = [];
+    converted.map( line => {
+      line = replaceAll(line, '\\.', '')
+      line = replaceAll(line, '\t', '')
+      line = replaceAll(line, '•', '')
+      result.push(line)
+    })
+    //console.log('converted: ' + converted);
+    this.setState({converted: result})
+    //save converted value
+    let obj = {}
+    obj['_result.' + this.state.selectedKey] = result
+    Schemas.update(this.props.item._id, {"$set": obj})
   },
 
   addMode() {
@@ -53,16 +104,14 @@ NewSchemaKey = React.createClass({
     if (this.state.selectedKey) {
       return <div>
         <div className='row'>
-        <input type="text" valueLink={this.linkState('selectedKey')}/>
-        <button onClick={this.insertKey}>Update Key</button>
-            </div>
+          <input type="text" valueLink={this.linkState('selectedKey')}/>
+          <button onClick={this.updateKey}>Update Key</button>
+          <button onClick={this.deleteKey}>Delete Key</button>
+        </div>
         <div className='row'>
-          <textarea valueLink={this.linkState('selectedValue')} />
+          <textarea rows='25' cols='100'
+                    valueLink={this.linkState('selectedValue')}/>
           <button onClick={this.updateValue}>Update Value</button>
-          </div>
-        <div>
-          <button onClick={this.convert}>Convert</button>
-          <textarea valueLink={this.linkState('converted')} />
         </div>
       </div>
     }
@@ -75,7 +124,7 @@ NewSchemaKey = React.createClass({
   },
 
   render() {
-    console.log('this.state: ' + JSON.stringify(this.state));
+    //console.log('this.state: ' + JSON.stringify(this.state));
     return (
       <div>
         <div className='row'>
@@ -84,12 +133,10 @@ NewSchemaKey = React.createClass({
               {this.renderKeys()}
               <button onClick={this.addMode}>Add Key</button>
 
-              <a href="#openModal">Structure View</a>
-              <div id="openModal" className="modalDialog">
-                <div><a href="#close" title="Close" className="close">X</a>
-                  <pre>{JSON.stringify(this.props.item, null, 4)}</pre>
-                </div>
-              </div>
+              <SimpleModal name='Structure' label='Structure'
+                           value={JSON.stringify(this.props.item, null, 4)} />
+              <SimpleModal name='Result' label='Result'
+                           value={JSON.stringify(this.props.item._result, null, 4)} />
 
             </div>
           </div>

@@ -35,14 +35,20 @@ replaceAll = function(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
-const test = [
-  ['shape', 'color', 'pattern'],
-  ['square', 'green', 'dots'],
-  ['circle', 'red', 'lines'],
-]
-var res = convertToObjectOfObjects(test)
-console.log('test: ' + JSON.stringify(res));
+//const test = [
+//  ['shape', 'color', 'pattern'],
+//  ['square', 'green', 'dots'],
+//  ['circle', 'red', 'lines'],
+//]
+//var res = convertToObjectOfObjects(test)
+//console.log('test: ' + JSON.stringify(res));
+
+//console.log('test replaceAll: ' + replaceAll('this. is. a. test', '\\.', ''));
 
 
-console.log('test replaceAll: ' + replaceAll('this. is. a. test', '\\.', ''));
+var s = '/schema/:id/NewSchemaKey';
+console.log('replace: ' + s.replace(':id', 'foo'));
 
+var a = 5;
+var b = 10;
+console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);

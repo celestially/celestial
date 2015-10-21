@@ -61,9 +61,9 @@ const auditRoutes = [
 const objs = convertToArrayOfObjects(auditRoutes);
 
 const routes = objs.map(route => {
-  console.log('route: ' + JSON.stringify(route));
+  //console.log('route: ' + JSON.stringify(route));
   //console.log('route.c: ' + route.content);
-  console.log('route.n: ' + route.name);
+  //console.log('route.n: ' + route.name);
   return <Route path={'/audit' + route.path}
                 layout={Layout2}
                 content={withAudit(route.content,route.name)}

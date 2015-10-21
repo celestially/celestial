@@ -47,47 +47,9 @@ SchemaInput = React.createClass({
     </div>
   },
 
-  openModal: function() {
-    this.setState({modalIsOpen: true});
-  },
-
-  closeModal: function() {
-    this.setState({modalIsOpen: false});
-  },
-
   render() {
-    //let section = this.state.section;
-    //let recs = this.props.sections[section].recs;
-    //let recsData;
-    //try {
-    //  recsData= this.props.item.report[section].recs || {};
-    //} catch(e) {
-    //  recsData = {}
-    //}
-    //let checkedData;
-    //try {
-    //  checkedData= this.props.item.report || {};
-    //} catch(e) {
-    //  checkedData = {}
-    //}
-    //
-    //Object.keys(recsData).map( it => {
-    //  console.log(it + ': ' + recsData[it].display);
-    //})
-    //console.log('test item: ' + recs[0]);
-
     return (
-      <div className='row'>
-        <div className='col-xs-3'>
-          <div className='reportSections orange'>
-            keys
-            <input type='button'
-                   onClick={this.newAudit}
-                   value='New Key' />
-
-          </div>
-        </div>
-        <div className='col-xs-9'>
+        <div>
           <span><b>XX</b>
           <input
             name='xx'
@@ -99,25 +61,7 @@ SchemaInput = React.createClass({
 
           Input here
 
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles} >
-
-            <h2>Hello</h2>
-            <button onClick={this.closeModal}>close</button>
-            <div>I am a modal</div>
-            <form>
-              <input />
-              <button>tab navigation</button>
-              <button>stays</button>
-              <button>inside</button>
-              <button>the modal</button>
-            </form>
-          </Modal>
-
         </div>
-      </div>
     );
   }
 });

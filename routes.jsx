@@ -10,9 +10,6 @@ Reaktor.init(
     <Route path="/audit/table" layout={Layout2} content={AuditTable}/>
     <Route path="/schema/list" layout={SchemaLayout} content={SchemaInput}/>
 
-    <Route path="/config" layout={SchemaLayout} content={configList(ItemList)}/>
-    <Route path="/config/report" layout={SchemaLayout} content={withSchema(ConfigEditor)}/>
-
   </Router>
 );
 

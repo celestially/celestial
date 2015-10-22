@@ -1,6 +1,6 @@
 var LinkedStateMixin = React.addons.LinkedStateMixin;
 
-ReportConfigEditor = React.createClass({
+ModuleConfigEditor = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
@@ -40,7 +40,7 @@ ReportConfigEditor = React.createClass({
   },
 
   renderForm() {
-    let schema = ['section', 'code']
+    let schema = ['name', 'routes']
     let rows = schema.map((field) => {
       return <tr key={field}>
         <td className="meta-head">{field}</td>

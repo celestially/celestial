@@ -6,8 +6,8 @@ withSchema = function(Component, section) {
     getMeteorData() {
       //console.log('id: ' + this.props.params.id)
       return {
-        //item: Schema.findOne({ _id: this.props.params.id })
-        item: Schemas.findOne()
+        item: Schemas.findOne({ _id: this.props.params.id })
+        //item: Schemas.findOne()
       };
     },
 
@@ -15,27 +15,21 @@ withSchema = function(Component, section) {
       if (! this.data.item) {
         return <div>404: Not found</div>;
       }
-
-      //console.log('this.data.item: ' + JSON.stringify(this.data.item));
-
-      //{getNavItems(this.props.params.id, section, SchemaSchema, objs, this.data.item)}
-
       return <div>
-
         <Component item={this.data.item} collection={Schemas} {...this.props} />
       </div>
     }
   })
 }
 
-configList = function() {
-  return React.createClass({
-    render() {
-      console.log('renderList: ');
-      return <ItemList Collection={Schemas} module="config" />
-    }
-  })
-}
+//configList = function() {
+//  return React.createClass({
+//    render() {
+//      console.log('renderList: ');
+//      return <ItemList Collection={Schemas} module="config" >
+//    }
+//  })
+//}
 
 
 const codeGenRoutes = [
@@ -59,5 +53,7 @@ const routes = objs.map(route => {
 Reaktor.init(
   <Router>
     {routes}
+    <Route path="/config" layout={SchemaLayout} content={ConfigList}/>
+    <Route path="/config/report" layout={SchemaLayout} content={withSchema(ConfigEditor)}/>
   </Router>);
 

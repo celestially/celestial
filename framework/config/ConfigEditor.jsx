@@ -15,7 +15,8 @@ ConfigEditor = React.createClass({
     this.setState({
       selectedKey: name,
       selectedValue: this.props.item[name],
-      oldKey: name
+      newKey: name,
+      oldKey: name,
     })
   },
 
@@ -76,13 +77,15 @@ ConfigEditor = React.createClass({
           <input type="text" valueLink={this.linkState('newKey')}/>
           <button onClick={this.insertKey}>Insert Key</button>
         </div>
-        <div>
-          <input type="text" valueLink={this.linkState('updateExp')}/>
-          <button onClick={this.updateExp}>Update Expression</button>
-        </div>
       </div>
     }
   },
+
+  //<div>
+  //  <input type="text" valueLink={this.linkState('updateExp')}/>
+  //  <button onClick={this.updateExp}>Update Expression</button>
+  //</div>
+
 
   render() {
     //console.log('this.state: ' + JSON.stringify(this.state));

@@ -4,7 +4,7 @@ withSchema = function(Component, section) {
     mixins: [ReactMeteorData],
 
     getMeteorData() {
-      console.log('id: ' + this.props.params.id)
+      //console.log('id: ' + this.props.params.id)
       return {
         //item: Schema.findOne({ _id: this.props.params.id })
         item: Schemas.findOne()
@@ -28,26 +28,36 @@ withSchema = function(Component, section) {
   })
 }
 
-//const codeGenRoutes = [
-//  ['path', 'name', 'content', 'label'],
-//  ['/:id/SchemaInput', 'SchemaInput', SchemaInput],
-//  ['/:id/NewSchemaKey', 'NewSchemaKey', NewSchemaKey],
-//];
-//
-//const objs = convertToArrayOfObjects(codeGenRoutes);
-//
-//const routes = objs.map(route => {
-//  console.log('route: ' + JSON.stringify(route));
-//  //console.log('route.c: ' + route.content);
-//  //console.log('route.n: ' + route.name);
-//  return <Route path={'/schema' + route.path}
-//                layout={SchemaLayout}
-//                content={withSchema(route.content,route.name)}
-//    />
-//})
-//
-//Reaktor.init(
-//  <Router>
-//    {routes}
-//  </Router>);
+configList = function() {
+  return React.createClass({
+    render() {
+      console.log('renderList: ');
+      return <ItemList Collection={Schemas} module="config" />
+    }
+  })
+}
+
+
+const codeGenRoutes = [
+  ['path', 'name', 'content', 'label'],
+  ['/:id/main', 'main', ConfigEditor],
+  ['/:id/SchemaInput', 'SchemaInput', SchemaInput],
+];
+
+const objs = convertToArrayOfObjects(codeGenRoutes);
+
+const routes = objs.map(route => {
+  console.log('config route: ' + JSON.stringify(route));
+  //console.log('route.c: ' + route.content);
+  //console.log('route.n: ' + route.name);
+  return <Route path={'/config' + route.path}
+                layout={SchemaLayout}
+                content={withSchema(route.content,route.name)}
+    />
+})
+
+Reaktor.init(
+  <Router>
+    {routes}
+  </Router>);
 

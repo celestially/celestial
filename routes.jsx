@@ -6,11 +6,12 @@ Reaktor.init(
 
     <Route path="/grid/ex1" layout={Layout} content={GridEx1} />
 
-    <Route path="/audit/list" layout={Layout2} content={AuditList}/>
+    <Route path="/audit/list" layout={Layout2} content={auditList(ItemList)}/>
     <Route path="/audit/table" layout={Layout2} content={AuditTable}/>
     <Route path="/schema/list" layout={SchemaLayout} content={SchemaInput}/>
 
-      <Route path="/config" layout={SchemaLayout} content={withSchema(NewSchemaKey)}/>
+    <Route path="/config" layout={SchemaLayout} content={configList(ItemList)}/>
+    <Route path="/config/report" layout={SchemaLayout} content={withSchema(ConfigEditor)}/>
 
   </Router>
 );

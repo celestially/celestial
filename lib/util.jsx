@@ -46,7 +46,7 @@ replaceAll = function(str, find, replace) {
 //console.log('test replaceAll: ' + replaceAll('this. is. a. test', '\\.', ''));
 
 
-//var s = '/schema/:id/NewSchemaKey';
+//var s = '/schema/:id/ConfigEditor';
 //console.log('replace: ' + s.replace(':id', 'foo'));
 //
 //var a = 5;

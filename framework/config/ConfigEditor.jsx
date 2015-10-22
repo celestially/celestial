@@ -1,6 +1,6 @@
 var LinkedStateMixin = React.addons.LinkedStateMixin;
 
-NewSchemaKey = React.createClass({
+ConfigEditor = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
@@ -30,8 +30,14 @@ NewSchemaKey = React.createClass({
   updateKey() {
     console.log('updateKey: ' + this.state.selectedKey);
     let obj = {}
-    obj[this.state.oldKey] = this.state.selectedKey
+    obj[this.state.selectedKey] = this.state.newKey
     Schemas.update(this.props.item._id, {"$rename": obj})
+    changeKey(this.state.newKey)
+  },
+
+  updateExp() {
+    console.log('updateExp: ' + this.state.updateExp);
+    Schemas.update(this.props.item._id, eval(this.state.updateExp))
   },
 
   deleteKey() {
@@ -39,52 +45,6 @@ NewSchemaKey = React.createClass({
     let obj = {}
     obj[this.state.selectedKey] = ''
     Schemas.update(this.props.item._id, {"$unset": obj})
-  },
-
-  updateValue() {
-    const selKey = this.state.selectedKey
-    console.log('updateValue: ' + this.state.selectedKey);
-    let obj = {}
-    obj[selKey] = this.state.selectedValue
-    Schemas.update(this.props.item._id, {"$set": obj})
-
-    //convert to array
-    const prefix = selKey.split(':')[0]
-    let converted = this.state.selectedValue.split("\n");
-    result = [];
-    converted.map( (line, i) => {
-      line = replaceAll(line, '\\.', '')
-      line = replaceAll(line, '\t', '')
-      line = replaceAll(line, '•', '')
-      line = line.replace(/^\s+|\s+$/g, '')
-      if (line.length>0) {
-        result.push([prefix+'-'+(i+1), line])
-      }
-    })
-    //console.log('converted: ' + converted);
-    this.setState({converted: result})
-    //save converted value
-    obj = {}
-    obj['_result.' + selKey] = result
-    Schemas.update(this.props.item._id, {"$set": obj})
-
-  },
-
-  convert() {
-    let converted = this.state.selectedValue.split("\n");
-    result = [];
-    converted.map( line => {
-      line = replaceAll(line, '\\.', '')
-      line = replaceAll(line, '\t', '')
-      line = replaceAll(line, '•', '')
-      result.push(line)
-    })
-    //console.log('converted: ' + converted);
-    this.setState({converted: result})
-    //save converted value
-    let obj = {}
-    obj['_result.' + this.state.selectedKey] = result
-    Schemas.update(this.props.item._id, {"$set": obj})
   },
 
   addMode() {
@@ -101,35 +61,38 @@ NewSchemaKey = React.createClass({
   },
 
   renderMain() {
-    if (this.state.selectedKey) {
+    if (this.props.selectedKey) {
       return <div>
         <div className='row'>
-          <input type="text" valueLink={this.linkState('selectedKey')}/>
+          <input type="text" valueLink={this.linkState('newKey')}/>
           <button onClick={this.updateKey}>Update Key</button>
           <button onClick={this.deleteKey}>Delete Key</button>
-        </div>
-        <div className='row'>
-          <textarea rows='25' cols='100'
-                    valueLink={this.linkState('selectedValue')}/>
-          <button onClick={this.updateValue}>Update Value</button>
         </div>
       </div>
     }
     else {
       return <div>
-        <input type="text" valueLink={this.linkState('newKey')}/>
-        <button onClick={this.insertKey}>Insert Key</button>
+        <div>
+          <input type="text" valueLink={this.linkState('newKey')}/>
+          <button onClick={this.insertKey}>Insert Key</button>
+        </div>
+        <div>
+          <input type="text" valueLink={this.linkState('updateExp')}/>
+          <button onClick={this.updateExp}>Update Expression</button>
+        </div>
       </div>
     }
   },
 
   render() {
     //console.log('this.state: ' + JSON.stringify(this.state));
+    const itemKeys = Object.keys(this.props.item)
+    console.log('this.props.item: ' + itemKeys);
     return (
       <div>
         <div className='row'>
           <div className='col-xs-3'>
-            <div className='reportSections orange'>
+            <div className='pad-cell orange'>
               {this.renderKeys()}
               <button onClick={this.addMode}>Add Key</button>
 
@@ -137,11 +100,11 @@ NewSchemaKey = React.createClass({
                            value={JSON.stringify(this.props.item, null, 4)} />
               <SimpleModal name='Result' label='Result'
                            value={JSON.stringify(this.props.item._result, null, 4)} />
-
             </div>
           </div>
           <div className='col-xs-9'>
             {this.renderMain()}
+            <ReportConfigEditor selectedKey={this.state.selectedKey} {...this.props} />
           </div>
         </div>
       </div>

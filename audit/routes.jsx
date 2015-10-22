@@ -49,6 +49,15 @@ function renderForm(schema, section) {
   })
 }
 
+auditList = function() {
+  return React.createClass({
+    render() {
+      console.log('renderList: ');
+      return <ItemList Collection={Audits} module="audit" />
+    }
+  })
+}
+
 const auditRoutes = [
   ['path', 'name', 'content', 'label'],
   ['/:id/Main', 'Main', renderForm(AuditMainSchema)],

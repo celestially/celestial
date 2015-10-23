@@ -2,11 +2,13 @@ ConfigList = React.createClass({
 
   newModule() {
     Schemas.insert({
-      name: "New Module",
       _meta: {
         class: 'module',
         schema: ['name', 'routes_input']
-      }
+      },
+      name: 'New Module',
+      routes: ''
+
     });
   },
 

@@ -107,7 +107,7 @@ ConfigEditor = React.createClass({
           </div>
           <div className='col-xs-9'>
             {this.renderMain()}
-            <ReportConfigEditor selectedKey={this.state.selectedKey} {...this.props} />
+            <ModuleConfigEditor selectedKey={this.state.selectedKey} {...this.props} />
           </div>
         </div>
       </div>

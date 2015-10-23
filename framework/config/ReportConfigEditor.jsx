@@ -16,27 +16,6 @@ ReportConfigEditor = React.createClass({
     obj[selKey] = this.state
     Schemas.update(this.props.item._id, {"$set": obj})
 
-    //convert to array
-    //const prefix = selKey.split(':')[0]
-    const prefix = selKey.split(':')[0]
-    let converted = this.state.selectedValue.split("\n");
-    result = [];
-    converted.map((line, i) => {
-      line = replaceAll(line, '\\.', '')
-      line = replaceAll(line, '\t', '')
-      line = replaceAll(line, '•', '')
-      line = line.replace(/^\s+|\s+$/g, '')
-      if (line.length > 0) {
-        result.push([prefix + '-' + (i + 1), line])
-      }
-    })
-    //console.log('converted: ' + converted);
-    this.setState({converted: result})
-    //save converted value
-    obj = {}
-    obj['_result.' + selKey] = result
-    Schemas.update(this.props.item._id, {"$set": obj})
-
   },
 
   renderForm() {

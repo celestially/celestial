@@ -15,8 +15,7 @@ ConfigEditor = React.createClass({
     this.setState({
       selectedKey: name,
       selectedValue: this.props.item[name],
-      newKey: name,
-      oldKey: name,
+      oldKey: name
     })
   },
 
@@ -31,14 +30,8 @@ ConfigEditor = React.createClass({
   updateKey() {
     console.log('updateKey: ' + this.state.selectedKey);
     let obj = {}
-    obj[this.state.selectedKey] = this.state.newKey
+    obj[this.state.oldKey] = this.state.selectedKey
     Schemas.update(this.props.item._id, {"$rename": obj})
-    changeKey(this.state.newKey)
-  },
-
-  updateExp() {
-    console.log('updateExp: ' + this.state.updateExp);
-    Schemas.update(this.props.item._id, eval(this.state.updateExp))
   },
 
   deleteKey() {
@@ -46,6 +39,17 @@ ConfigEditor = React.createClass({
     let obj = {}
     obj[this.state.selectedKey] = ''
     Schemas.update(this.props.item._id, {"$unset": obj})
+  },
+
+  updateValue() {
+    const selKey = this.state.selectedKey
+    console.log('updateValue: ' + this.state.selectedKey);
+    let obj = {}
+    obj[selKey] = this.state.selectedValue
+    Schemas.update(this.props.item._id, {"$set": obj})
+
+    console.log('call super : ' + this.props.afterUpdateValue)
+    this.props.afterUpdateValue();
   },
 
   addMode() {
@@ -62,40 +66,35 @@ ConfigEditor = React.createClass({
   },
 
   renderMain() {
-    if (this.props.selectedKey) {
+    if (this.state.selectedKey) {
       return <div>
         <div className='row'>
-          <input type="text" valueLink={this.linkState('newKey')}/>
+          <input type="text" valueLink={this.linkState('selectedKey')}/>
           <button onClick={this.updateKey}>Update Key</button>
           <button onClick={this.deleteKey}>Delete Key</button>
+        </div>
+        <div className='row'>
+          <textarea rows='25' cols='100'
+                    valueLink={this.linkState('selectedValue')}/>
+          <button onClick={this.updateValue}>Update Value</button>
         </div>
       </div>
     }
     else {
       return <div>
-        <div>
-          <input type="text" valueLink={this.linkState('newKey')}/>
-          <button onClick={this.insertKey}>Insert Key</button>
-        </div>
+        <input type="text" valueLink={this.linkState('newKey')}/>
+        <button onClick={this.insertKey}>Insert Key</button>
       </div>
     }
   },
 
-  //<div>
-  //  <input type="text" valueLink={this.linkState('updateExp')}/>
-  //  <button onClick={this.updateExp}>Update Expression</button>
-  //</div>
-
-
   render() {
     //console.log('this.state: ' + JSON.stringify(this.state));
-    const itemKeys = Object.keys(this.props.item)
-    console.log('this.props.item: ' + itemKeys);
     return (
       <div>
         <div className='row'>
           <div className='col-xs-3'>
-            <div className='pad-cell orange'>
+            <div className='reportSections orange'>
               {this.renderKeys()}
               <button onClick={this.addMode}>Add Key</button>
 
@@ -103,11 +102,11 @@ ConfigEditor = React.createClass({
                            value={JSON.stringify(this.props.item, null, 4)} />
               <SimpleModal name='Result' label='Result'
                            value={JSON.stringify(this.props.item._result, null, 4)} />
+
             </div>
           </div>
           <div className='col-xs-9'>
             {this.renderMain()}
-            <ModuleConfigEditor selectedKey={this.state.selectedKey} {...this.props} />
           </div>
         </div>
       </div>

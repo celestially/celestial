@@ -1,6 +1,7 @@
-getNavItems = function (id, section, schema, objs, item) {
+getNavItems = function (id_old, section, schema, objs, item) {
 
   console.log('getNavItems: ' );
+  const id = item._id;
   const navs = objs.map(route => {
     console.log('NI route: ' + JSON.stringify(route));
     let item

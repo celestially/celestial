@@ -30,7 +30,7 @@ ItemList = React.createClass({
     return <div>
       <h3>{this.data.items.length} Items found</h3>
       <input type='button'
-             onClick={this.newModule}
+             onClick={this.newItem}
              value='Create New Item'/>
       <hr />
       <ul className="list">

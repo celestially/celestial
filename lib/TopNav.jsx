@@ -7,16 +7,13 @@ TopNav = React.createClass({
             Home
           </div>
           <div className='nav-cell'>
-            <a href='/customer'>Customers</a>
+            <a href='/customer/list'>Customers</a>
           </div>
           <div className='nav-cell'>
             <a href='/audit/list'>Audits</a>
           </div>
           <div className='nav-cell'>
-            <a href='/schema/list'>Schemas</a>
-          </div>
-          <div className='nav-cell'>
-            <a href='/config'>Config</a>
+            <a href='/config/list'>Config</a>
           </div>
         </div>
         <hr />

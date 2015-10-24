@@ -18,7 +18,7 @@ Reaktor.init(
 
     {celestial.createRoutes(customerModule)}
 
-    <Route path="/customer"
+    <Route path="/customer/list"
            layout={Layout}
            content={celestial.getListComponent(customerModule)} />
   </Router>);

@@ -1,25 +1,4 @@
-withSchema = function (Component, section) {
-  return React.createClass({
-    mixins: [ReactMeteorData],
-
-    getMeteorData() {
-      //console.log('id: ' + this.props.params.id)
-      return {
-        item: Schemas.findOne({_id: this.props.params.id})
-        //item: Schemas.findOne()
-      };
-    },
-
-    render() {
-      if (!this.data.item) {
-        return <div>404: Not found</div>;
-      }
-      return <div>
-        <Component item={this.data.item} collection={Schemas} {...this.props} />
-      </div>
-    }
-  })
-};
+//Schemas = new Mongo.Collection('configs');
 
 reportConfigEditor = function (Component, section) {
   return React.createClass({
@@ -80,22 +59,19 @@ const codeGenRoutes = [
   ['/:id/report', 'report', reportConfigEditor()],
 ];
 
-const objs = convertToArrayOfObjects(codeGenRoutes);
-
-const routes = objs.map(route => {
-  console.log('config route: ' + JSON.stringify(route));
-  //console.log('route.c: ' + route.content);
-  //console.log('route.n: ' + route.name);
-  return <Route path={'/config' + route.path}
-                layout={SchemaLayout}
-                content={withSchema(route.content,route.name)}
-  />
-})
+const configModule = {
+  name: 'config',
+  collection: Schemas,
+  layout: Layout,
+  routes: convertToArrayOfObjects(codeGenRoutes)
+};
 
 Reaktor.init(
   <Router>
-    {routes}
-    <Route path="/config" layout={SchemaLayout} content={ConfigList}/>
-    <Route path="/config/xx" layout={SchemaLayout} content={withSchema(ConfigEditor)}/>
-  </Router>);
 
+    {celestial.createRoutes(configModule)}
+
+    <Route path="/config/list"
+           layout={Layout}
+           content={ConfigList} />
+  </Router>);

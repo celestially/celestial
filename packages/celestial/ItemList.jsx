@@ -25,8 +25,6 @@ ItemList = React.createClass({
       </li>
     })
 
-    console.log('this.props.params: ' + JSON.stringify(this.props.params));
-
     return <div>
       <h3>{this.data.items.length} Items found</h3>
       <input type='button'

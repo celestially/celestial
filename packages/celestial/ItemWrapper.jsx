@@ -26,7 +26,7 @@ celestial.getListComponent = function(module) {
     render() {
       console.log('getListComponent: ');
       //console.log('Customers: ' + Customers);
-      return <ItemList Collection={module.collection} module="customer" />
+      return <ItemList Collection={module.collection} module={module.name} />
     }
   })
 }

@@ -17,7 +17,7 @@ SchemaLayout = React.createClass({
 });
 
 SchemaSchema = {
-  singularName: 'Schema',
+  name: 'Schema',
   pluralName: 'Schemas',
   collection: Schemas,
   layout: SchemaLayout

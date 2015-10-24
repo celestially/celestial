@@ -1,4 +1,4 @@
-getNavItems = function (id_old, section, schema, objs, item) {
+celestial.getNavItems = function (id_old, section, schema, objs, item) {
 
   console.log('getNavItems: ' );
   const id = item._id;
@@ -16,7 +16,7 @@ getNavItems = function (id_old, section, schema, objs, item) {
 
     } else {
       item = (<div className='nav-cell'>
-        <a href={'/' + schema.singularName + '/' + id + '/' + route.name}>
+        <a href={'/' + schema.name + '/' + id + '/' + route.name}>
           {label}</a>
       </div>)
     }

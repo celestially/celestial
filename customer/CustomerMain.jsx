@@ -11,8 +11,7 @@ CustomerMain = React.createClass({
     console.log('CustomerMain: ');
     return <div className="row">
       <div className="col-xs-6">
-        <AutoForm collection={Customers}
-                  fields={custMainSchema}
+        <AutoForm fields={custMainSchema}
                   {...this.props} />
       </div>
     </div>

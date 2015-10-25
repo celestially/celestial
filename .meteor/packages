@@ -26,6 +26,7 @@ check
 meteorhacks:npm
 cosmos:browserify
 celestial:celestial
-
+cfs:standard-packages
+cfs:gridfs
 
 npm-container

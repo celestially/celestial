@@ -15,7 +15,7 @@ celestial.ItemWrapper = function (Component, section, module) {
       return <div>
         {celestial.getNavItems('', section, module, module.routes, this.data.item)}
 
-        <Component item={this.data.item} collection={module.collection} {...this.props} />
+        <Component item={this.data.item} collection={module.collection} module={module} {...this.props} />
       </div>
     }
   })
@@ -26,7 +26,7 @@ celestial.getListComponent = function(module) {
     render() {
       console.log('getListComponent: ');
       //console.log('Customers: ' + Customers);
-      return <ItemList Collection={module.collection} module={module.name} />
+      return <ItemList collection={module.collection} module={module.name} />
     }
   })
 }

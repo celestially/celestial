@@ -1,21 +1,27 @@
-//Schemas = new Mongo.Collection('configs');
+//Configs = new Mongo.Collection('configs');
 
 reportConfigEditor = function (Component, section) {
   return React.createClass({
 
-    afterUpdateValue() {
+    afterUpdateValue(selKey,selValue) {
       //convert to array
       //const prefix = selKey.split(':')[0]
-      const prefix = selKey.split(':')[0]
-      let converted = this.state.selectedValue.split("\n");
+      const parr = selKey.split('::')
+      const prefix = parr[parr.length-2]
+      let converted = selValue.split("\n");
       result = [];
       converted.map((line, i) => {
         line = replaceAll(line, '\\.', '')
         line = replaceAll(line, '\t', '')
         line = replaceAll(line, '•', '')
         line = line.replace(/^\s+|\s+$/g, '')
-        if (line.length > 0) {
+        if (line.indexOf("::") > -1) {
+          let split = line.split('::')
+          result.push([split[0],split[1]])
+        }
+        else if (line.length > 0) {
           result.push([prefix + '-' + (i + 1), line])
+          //result.push(prefix + '-' + (i + 1) + '::' + line)
         }
       })
       //console.log('converted: ' + converted);
@@ -23,7 +29,7 @@ reportConfigEditor = function (Component, section) {
       //save converted value
       let obj = {}
       obj['_result.' + selKey] = result
-      Schemas.update(this.props.item._id, {"$set": obj})
+      Configs.update(this.props.item._id, {"$set": obj})
     },
 
     render() {
@@ -40,7 +46,7 @@ moduleConfigEditor = function (Component, section) {
       console.log('afterUpdateValue: ');
       const routes = this.props.item['routes']
       template = `moduleRoutes = ${routes}`
-      Schemas.update(this.props.item._id,
+      Configs.update(this.props.item._id,
         {"$set": {_generated: template}})
     },
 
@@ -61,7 +67,7 @@ const codeGenRoutes = [
 
 const configModule = {
   name: 'config',
-  collection: Schemas,
+  collection: Configs,
   layout: Layout,
   routes: convertToArrayOfObjects(codeGenRoutes)
 };

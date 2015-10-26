@@ -25,6 +25,7 @@ Package.onUse(function(api) {
     'nav.jsx',
     'ItemWrapper.jsx',
     'ItemList.jsx',
+    'ConfigItemWrapper.jsx',
     'routeUtils.jsx',
     ]);
 

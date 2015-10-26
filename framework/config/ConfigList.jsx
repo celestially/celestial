@@ -1,7 +1,7 @@
 ConfigList = React.createClass({
 
   newModule() {
-    Schemas.insert({
+    Configs.insert({
       _meta: {
         class: 'module',
         schema: ['name', 'routes_input']
@@ -14,7 +14,7 @@ ConfigList = React.createClass({
 
   render() {
     console.log('confList: ');
-    return <ItemList Collection={Schemas} module="config" >
+    return <ItemList Collection={Configs} module="config" >
       <input type='button'
              onClick={this.newModule}
              value='Create New Module'/>

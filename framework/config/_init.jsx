@@ -1,5 +1,3 @@
-//TODO: this module doesn't work yet
-
-Schemas = new Mongo.Collection('schema');
+Configs = new Mongo.Collection('schema');
 
 

@@ -23,22 +23,22 @@ ConfigEditor = React.createClass({
     console.log('insertKey: ' + this.state.newKey);
     let obj = {}
     obj[this.state.newKey] = ''
-    Schemas.update(this.props.item._id, {"$set": obj})
-    changeKey(this.state.newKey)
+    this.props.module.collection.update(this.props.item._id, {"$set": obj})
+    this.changeKey(this.state.newKey)
   },
 
   updateKey() {
     console.log('updateKey: ' + this.state.selectedKey);
     let obj = {}
     obj[this.state.oldKey] = this.state.selectedKey
-    Schemas.update(this.props.item._id, {"$rename": obj})
+    this.props.module.collection.update(this.props.item._id, {"$rename": obj})
   },
 
   deleteKey() {
     console.log('deleteKey: ' + this.state.selectedKey);
     let obj = {}
     obj[this.state.selectedKey] = ''
-    Schemas.update(this.props.item._id, {"$unset": obj})
+    this.props.module.collection.update(this.props.item._id, {"$unset": obj})
   },
 
   updateValue() {
@@ -46,10 +46,10 @@ ConfigEditor = React.createClass({
     console.log('updateValue: ' + this.state.selectedKey);
     let obj = {}
     obj[selKey] = this.state.selectedValue
-    Schemas.update(this.props.item._id, {"$set": obj})
+    this.props.module.collection.update(this.props.item._id, {"$set": obj})
 
     console.log('call super : ' + this.props.afterUpdateValue)
-    this.props.afterUpdateValue();
+    this.props.afterUpdateValue(this.state.selectedKey, this.state.selectedValue);
   },
 
   addMode() {
@@ -58,7 +58,7 @@ ConfigEditor = React.createClass({
 
   renderKeys() {
     const keys = Object.keys(this.props.item);
-    return keys.map((it, i) => {
+    return keys.sort().map((it, i) => {
       return <div key={i}>
         <a href='#' onClick={this.changeKey.bind(this,it)}>{it}</a>
       </div>

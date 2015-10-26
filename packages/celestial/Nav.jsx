@@ -1,13 +1,9 @@
 celestial.getNavItems = function (id_old, section, schema, objs, item) {
 
-  console.log('getNavItems: ' );
   const id = item._id;
   const navs = objs.map(route => {
-    console.log('NI route: ' + JSON.stringify(route));
+    //console.log('NI route: ' + JSON.stringify(route));
     let item
-    //console.log('NI section: ' + section);
-    //console.log('NI route.name: ' + route.name);
-    //console.log('NI schema.singularName: ' + schema.singularName);
     let label = route.label || route.name;
     if (section == route.name) {
       item = (<div className='nav-cell orange'>
@@ -27,7 +23,7 @@ celestial.getNavItems = function (id_old, section, schema, objs, item) {
     <div className='row'>
       {navs}
       <div className='nav-cell'>
-        <a href="#openModal">Structure View</a>
+        <a href="#openModal">JSON View</a>
         <div id="openModal" className="modalDialog">
           <div><a href="#close" title="Close" className="close">X</a>
             <pre>{JSON.stringify(item, null, 4)}</pre>

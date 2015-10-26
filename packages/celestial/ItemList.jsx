@@ -3,18 +3,18 @@ ItemList = React.createClass({
 
   getMeteorData() {
     return {
-      items: this.props.Collection.find().fetch()
+      items: this.props.module.collection.find().fetch()
     };
   },
 
   newItem() {
-    this.props.Collection.insert({name: "New Item"});
+    this.props.module.collection.insert({name: "New Item"});
   },
 
   render() {
     var items = this.data.items.map(i => {
       return <li className="list-group-item">
-        <a href={'/'+this.props.module+'/' + i._id + '/main'}
+        <a href={'/'+this.props.module.name+'/' + i._id + '/main'}
            className="tooltip"
         >
           <div>

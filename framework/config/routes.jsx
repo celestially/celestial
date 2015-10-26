@@ -72,6 +72,29 @@ const configModule = {
   routes: convertToArrayOfObjects(codeGenRoutes)
 };
 
+ConfigList = React.createClass({
+  newModule() {
+    Configs.insert({
+      _meta: {
+        class: 'module',
+        schema: ['name', 'routes_input']
+      },
+      name: 'New Module',
+      routes: ''
+
+    });
+  },
+
+  render() {
+    console.log('confList: ');
+    return <ItemList module={configModule} >
+      <input type='button'
+             onClick={this.newModule}
+             value='Create New Module'/>
+    </ItemList>
+  }
+})
+
 Reaktor.init(
   <Router>
 
@@ -81,3 +104,5 @@ Reaktor.init(
            layout={Layout}
            content={ConfigList} />
   </Router>);
+
+;

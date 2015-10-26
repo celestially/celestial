@@ -9,7 +9,7 @@ reportConfigEditor = function (Component, section) {
       const parr = selKey.split('::')
       const prefix = parr[parr.length-2]
       let converted = selValue.split("\n");
-      result = [];
+      let result = [];
       converted.map((line, i) => {
         line = replaceAll(line, '\\.', '')
         line = replaceAll(line, '\t', '')
@@ -63,6 +63,7 @@ const codeGenRoutes = [
   ['/:id/main', 'main', ConfigEditor],
   ['/:id/module', 'module', moduleConfigEditor()],
   ['/:id/report', 'report', reportConfigEditor()],
+  ['/:id/report2', 'report2', ReportTypeEditor],
 ];
 
 const configModule = {

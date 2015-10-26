@@ -17,12 +17,13 @@ ConfigEditor = React.createClass({
       selectedValue: this.props.item[name],
       oldKey: name
     })
+    this.props.onSelectKey(name);
   },
 
   insertKey() {
     console.log('insertKey: ' + this.state.newKey);
     let obj = {}
-    obj[this.state.newKey] = ''
+    obj[this.state.newKey] = {}
     this.props.module.collection.update(this.props.item._id, {"$set": obj})
     this.changeKey(this.state.newKey)
   },
@@ -42,6 +43,10 @@ ConfigEditor = React.createClass({
   },
 
   updateValue() {
+    if (this.props.handleUpdateValue) {
+      this.props.handleUpdateValue(this.state.selectedKey, this.state.selectedValue);
+      return;
+    }
     const selKey = this.state.selectedKey
     console.log('updateValue: ' + this.state.selectedKey);
     let obj = {}
@@ -65,6 +70,21 @@ ConfigEditor = React.createClass({
     });
   },
 
+  renderDefaultValueEditor() {
+    if (this.props.children) {
+      console.log('has Children: ' );
+      return;
+    } else {
+      console.log('no Children: ' );
+    }
+    return (
+      <div>
+      <textarea rows='25' cols='100'
+                valueLink={this.linkState('selectedValue')}/>
+      <button onClick={this.updateValue}>Update Value</button>
+    </div>)
+  },
+
   renderMain() {
     if (this.state.selectedKey) {
       return <div>
@@ -72,11 +92,13 @@ ConfigEditor = React.createClass({
           <input type="text" valueLink={this.linkState('selectedKey')}/>
           <button onClick={this.updateKey}>Update Key</button>
           <button onClick={this.deleteKey}>Delete Key</button>
+          <SimpleModal name='State' label='State'
+                       value={JSON.stringify(this.props.state, null, 4)}/>
+
         </div>
         <div className='row'>
-          <textarea rows='25' cols='100'
-                    valueLink={this.linkState('selectedValue')}/>
-          <button onClick={this.updateValue}>Update Value</button>
+          {this.props.children}
+          {this.renderDefaultValueEditor()}
         </div>
       </div>
     }
@@ -99,9 +121,9 @@ ConfigEditor = React.createClass({
               <button onClick={this.addMode}>Add Key</button>
 
               <SimpleModal name='Structure' label='Structure'
-                           value={JSON.stringify(this.props.item, null, 4)} />
+                           value={JSON.stringify(this.props.item, null, 4)}/>
               <SimpleModal name='Result' label='Result'
-                           value={JSON.stringify(this.props.item._result, null, 4)} />
+                           value={JSON.stringify(this.props.item._result, null, 4)}/>
 
             </div>
           </div>

@@ -11,7 +11,7 @@ ReportTypeEditor = React.createClass({
     const selKey = this.state.selectedKey
     const selValue = this.state.selectedValue
     const parr = selKey.split('::')
-    const prefix = parr[parr.length-2]
+    const prefix = parr[parr.length-2] || 'XX'
     let converted = selValue.split("\n");
     let result = [];
     converted.map((line, i) => {
@@ -28,17 +28,21 @@ ReportTypeEditor = React.createClass({
         //result.push(prefix + '-' + (i + 1) + '::' + line)
       }
     })
-    console.log('updateValue: ' + this.state.selectedKey);
-    let obj = {}
-    obj[selKey + '.items'] = result
-    this.props.module.collection.update(this.props.item._id, {"$set": obj})
-    this.setState({
-      selectedKey: selKey,
-      selectedValue: {
-        items: result
-      },
-      oldKey: selKey
+    console.log('reportEditor updateValue: ' + this.state.selectedKey);
+    result.map( line => {
+      let obj = {}
+      console.log('addItems selKey: ' + selKey);
+      obj[selKey + '.items'] = line
+      this.props.module.collection.update(this.props.item._id, {"$push": obj})
     })
+    //this.setState({
+    //  selectedKey: selKey,
+    //  selectedValue: {
+    //    items: result
+    //  },
+    //  oldKey: selKey
+    //})
+    this.onSelectKey(selKey)
 
   },
 
@@ -62,10 +66,18 @@ ReportTypeEditor = React.createClass({
     return (
       <div>
         <ConfigEditor module="config" {...this.props} onSelectKey={this.onSelectKey}>
+          <table>
+            <tbody>
           {items.map(item => {
-            return <div>item: {item}</div>
+            //return <div>item: {item}</div>
+            return <tr>
+              <td>{item[0]}--{item[1]}</td>
+              <td>+items +images</td>
+            </tr>
             })}
-          <textarea rows='25' cols='100'
+            </tbody>
+          </table>
+          <textarea rows='10' cols='50'
                 valueLink={this.linkState('selectedValue')}/>
           <button onClick={this.addItems}>Add Items</button>
         </ConfigEditor>)

@@ -23,12 +23,8 @@ celestial.getNavItems = function (id_old, section, schema, objs, item) {
     <div className='row'>
       {navs}
       <div className='nav-cell'>
-        <a href="#openModal">JSON View</a>
-        <div id="openModal" className="modalDialog">
-          <div><a href="#close" title="Close" className="close">X</a>
-            <pre>{JSON.stringify(item, null, 4)}</pre>
-          </div>
-        </div>
+        <SimpleModal name='Structure' label='Structure'
+                     value={JSON.stringify(item, null, 4)}/>
       </div>
     </div>
     <hr />

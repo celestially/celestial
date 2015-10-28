@@ -14,14 +14,14 @@ ReportConfigEditor = React.createClass({
     console.log('go to name: ' + name);
     this.setState({
       selectedKey: name,
-      selectedValue: this.props.item[name],
+      selectedValue: this.props.item.report[name],
       oldKey: name
     })
-    this.props.onSelectKey(name);
+    //this.props.onSelectKey(name);
   },
 
   insertKey() {
-    const newKey = `${this.props.docPath}.${this.state.newKey}`;
+    const newKey = `report.${this.state.newKey}`;
     console.log('insertKey: ' + newKey);
     let obj = {}
     obj[newKey] = {}
@@ -30,14 +30,17 @@ ReportConfigEditor = React.createClass({
   },
 
   updateKey() {
-    console.log('updateKey: ' + this.state.selectedKey);
+    const oldKey = `report.${this.state.oldKey}`;
+    const selectedKey = `report.${this.state.selectedKey}`;
+    console.log('updateKey: ' + oldKey + ', ' + selectedKey);
     let obj = {}
-    obj[this.state.oldKey] = this.state.selectedKey
+    obj[oldKey] = selectedKey
+    console.log('obj: ' + JSON.stringify(obj));
     this.props.module.collection.update(this.props.item._id, {"$rename": obj})
   },
 
   deleteKey() {
-    const key = `${this.props.docPath}.${this.state.selectedKey}`;
+    const key = `report.${this.state.selectedKey}`;
     console.log('deleteKey: ' + key);
     let obj = {}
     obj[key] = ''
@@ -66,18 +69,19 @@ ReportConfigEditor = React.createClass({
   renderKeys() {
     let hideSectionMap = {}
     try {
-      this.props.item['1_report_sections'].items.map( item => {
+      this.props.item.report['0: report sections'].items.map( item => {
         console.log('item.key,hide: ' + item.key + ',' + !item.show);
         hideSectionMap[item.key] = !item.show;
       })
     } catch(e) {
       console.log('e.stack: ' + e.stack);
+      return <div>error in renderKeys</div>
     }
-    const keys = Object.keys(this.props.item);
+    const keys = Object.keys(this.props.item.report);
     console.log('renderKeys keys: ' + keys);
     return keys.sort().map((it, i) => {
       console.log('it.sectionKey: ' + it.sectionKey);
-      if (!hideSectionMap[this.props.item[it].sectionKey]) {
+      if (!hideSectionMap[this.props.item.report[it].sectionKey]) {
         return <div key={i}>
           <a href='#' onClick={this.changeKey.bind(this,it)}>{it}</a>
         </div>
@@ -86,6 +90,7 @@ ReportConfigEditor = React.createClass({
   },
 
   renderKeyEditor() {
+    console.log('renderKeyEditor this.state.selectedKey: ' + this.state.selectedKey);
     if (this.props.editConfigMode) {
       if (this.state.selectedKey) {
         return <div>
@@ -104,25 +109,24 @@ ReportConfigEditor = React.createClass({
   },
 
   renderValueEditor() {
+    console.log('renderValueEditor this.state.selectedKey: ' + this.state.selectedKey);
     if (this.state.selectedKey) {
-      let defaultValueEditor;
-      if (!this.props.children) {
-        defaultValueEditor = <div>
-          <textarea rows='25' cols='100'
-                valueLink={this.linkState('selectedValue')}/>
-          <button onClick={this.updateValue}>Update Value</button>
-        </div>
-      }
+      //let defaultValueEditor;
+      //if (!this.props.children) {
+      //  defaultValueEditor = <div>
+      //    <textarea rows='25' cols='100'
+      //          valueLink={this.linkState('selectedValue')}/>
+      //    <button onClick={this.updateValue}>Update Value</button>
+      //  </div>
+      //}
 
       return <div className='row'>
-        {this.props.children}
-        {defaultValueEditor}
+        <CheckboxList {...this.props} selectedKey={this.state.selectedKey} />
       </div>
     }
   },
 
   render() {
-
     let addKeyUtils
     if (this.props.editConfigMode) {
       addKeyUtils = <div>

@@ -1,4 +1,4 @@
-ReportTypeEditor = React.createClass({
+CheckboxList = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function () {
@@ -8,7 +8,7 @@ ReportTypeEditor = React.createClass({
   },
 
   addItems(e) {
-    const selKey = this.state.selectedKey
+    const selKey = this.props.selectedKey
     const selValue = this.state.selectedValue
     const parr = selKey.split('::')
     const prefix = parr[parr.length - 2] || '_'
@@ -30,7 +30,7 @@ ReportTypeEditor = React.createClass({
         })
       }
     })
-    console.log('reportEditor updateValue: ' + this.state.selectedKey);
+    console.log('reportEditor updateValue: ' + this.props.selectedKey);
     result.map(line => {
       let obj = {}
       console.log('addItems selKey: ' + selKey);
@@ -57,8 +57,8 @@ ReportTypeEditor = React.createClass({
   },
 
   getItems() {
-    if (this.getReportItem()[this.state.selectedKey]) {
-      return this.getReportItem()[this.state.selectedKey].items || []
+    if (this.getReportItem()[this.props.selectedKey]) {
+      return this.getReportItem()[this.props.selectedKey].items || []
     }
     else {
       return []
@@ -68,7 +68,7 @@ ReportTypeEditor = React.createClass({
   setChecked(e) {
     console.log('setChecked: ' + e.target.name + ", " + e.target.value, ', ' + e.target.checked);
     let obj = {}
-    const dotKey = `report.${this.state.selectedKey}.items.${e.target.name}.show`;
+    const dotKey = `report.${this.props.selectedKey}.items.${e.target.name}.show`;
     console.log('setChecked selKey: ' + dotKey + ', ' + this.getReportItem()._id);
     obj[dotKey] = e.target.checked
     this.props.module.collection.update(this.getReportItem()._id, {"$set": obj})
@@ -77,59 +77,62 @@ ReportTypeEditor = React.createClass({
   setSectionChecked(e) {
     console.log('setChecked: ' + e.target.name + ", " + e.target.value, ', ' + e.target.checked);
     let obj = {}
-    const dotKey = `report.${this.state.selectedKey}.hideSection`;
+    const dotKey = `report.${this.props.selectedKey}.hideSection`;
     obj[dotKey] = e.target.checked
     console.log('setChecked obj: ' + JSON.stringify(obj) + ' - ' + this.getReportItem()._id);
     this.props.module.collection.update(this.getReportItem()._id, {"$set": obj})
   },
 
   renderCheckboxes() {
-    if (!this.getReportItem()[this.state.selectedKey].hideSection) {
-      return this.getItems().map((item, i) => {
-        //return <div>item: {item}</div>
-        return <div>
-          <input
-            name={i}
-            type='checkbox'
-            onChange={this.setChecked}
-            checked={item.show}/>
-          {item.value} <a href={'#openModal' + 'LI_' + i}>edit</a>
-          <TextboxModal value={item.value}
-                        itemKey={item.key}
-            {...this.props}
-                        name={'LI_' + i}
-                        selKey={this.state.selectedKey}
-                        id={this.getReportItem()._id}
-          />
-        </div>
-      })
+    if (!this.getReportItem()[this.props.selectedKey].hideSection) {
+    return this.getItems().map((item, i) => {
+      //return <div>item: {item}</div>
+      return <div>
+        <input
+          name={i}
+          type='checkbox'
+          onChange={this.setChecked}
+          checked={item.show}/>
+        {item.value} <a href={'#openModal' + 'LI_' + i}>edit</a>
+        <TextboxModal value={item.value}
+                      itemKey={item.key}
+          {...this.props}
+                      name={'LI_' + i}
+                      selKey={this.props.selectedKey}
+                      id={this.getReportItem()._id}
+        />
+      </div>
+    })
     }
   },
 
   renderItemsList() {
+    console.log('renderItemsList this.getReportItem(): ' + this.getReportItem())
+    console.log('renderItemsList this.props.selectedKey: ' + this.props.selectedKey)
     let addItems
-    if (this.props.editConfigMode) {
+    //if (this.props.editConfigMode) {
       addItems = <div>
         <textarea rows='5' cols='50' valueLink={this.linkState('selectedValue')}/>
         <button onClick={this.addItems}>Add Items</button>
       </div>
+    //}
 
-    }
     try {
       return <div className="fw">
         <h3>
-          {this.state.selectedKey} items
-          <input
-            name='sectionChecked'
-            type='checkbox'
-            onChange={this.setSectionChecked}
-            checked={this.getReportItem()[this.state.selectedKey].hideSection}/> hidden
+          {this.props.selectedKey} items <input
+          name='sectionChecked'
+          type='checkbox'
+          onChange={this.setSectionChecked}
+          checked={this.getReportItem()[this.props.selectedKey].hideSection}/> hidden
+
         </h3>
         {this.renderCheckboxes()}
         {addItems}
       </div>
     } catch (e) {
       console.log('e.stack: ' + e.stack);
+      return <div>error in renderItemsList</div>
     }
   },
 
@@ -151,21 +154,15 @@ ReportTypeEditor = React.createClass({
 
     const topFields = ['description', 'sectionKey']
 
+
     return (
       <div>
-        <ReportConfigEditor module="config"
-          {...this.props}
-                            item={this.getReportItem()}
-                            onSelectKey={this.onSelectKey}
-                            docPath="report"
-        >
-          <div className="fw">
-            <AutoForm fields={topFields}
-                      topKey='report'
-                      subKey={this.state.selectedKey} {...this.props} />
-          </div>
-          {this.renderItemsList()}
-        </ReportConfigEditor>
+        <div className="fw">
+          <AutoForm fields={topFields}
+                    topKey='report'
+                    subKey={this.props.selectedKey} {...this.props} />
+        </div>
+        {this.renderItemsList()}
       </div>)
   }
 })
@@ -210,7 +207,6 @@ TextboxModal = React.createClass({
   render() {
     return (
       <div>
-
         <div id={'openModal' + this.props.name} className="modalDialog">
           <div><a href="#close" title="Close" className="close" onClick={this.save}>X</a>
             <input type="text"

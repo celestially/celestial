@@ -62,7 +62,7 @@ reportTypeEditor = function () {
   return React.createClass({
     render() {
       console.log('render reportTypeEditor: ');
-      return <ReportTypeEditor editConfigMode={true} {...this.props} />
+      return <ReportConfigEditor editConfigMode={true} {...this.props} />
     }
   })
 }

@@ -124,11 +124,11 @@ ReportTypeEditor = React.createClass({
     //  items = []
     //}
 
-    const topFields = ['description']
+    const topFields = ['description', 'sectionKey']
 
     return (
       <div>
-        <ConfigEditor module="config"
+        <ReportConfigEditor module="config"
           {...this.props}
                       item={this.getReportItem()}
                       onSelectKey={this.onSelectKey}
@@ -140,7 +140,7 @@ ReportTypeEditor = React.createClass({
                       subKey={this.state.selectedKey} {...this.props} />
           </div>
           {this.renderItemsTable()}
-        </ConfigEditor>
+        </ReportConfigEditor>
       </div>)
   }
 })

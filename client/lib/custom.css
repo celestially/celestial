@@ -10,6 +10,11 @@
     background: lightgreen;
 }
 
+.grayedSmall {
+    color: grey;
+    font-size: 70%;
+}
+
 .grayed {
     color: grey;
 }
@@ -41,7 +46,6 @@
 }
 
 .right {
-    position: absolute;
     right: 0px;
     /*width: 300px;*/
     /*border:3px solid #8AC007;*/

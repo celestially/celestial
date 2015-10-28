@@ -1,4 +1,3 @@
-Gallery = new Mongo.Collection('gallery');
 
 const galleryModule = {
   name: 'gallery',

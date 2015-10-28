@@ -1,3 +1,5 @@
+Gallery = new Mongo.Collection('gallery');
+
 var imageStore = new FS.Store.GridFS('images');
 
 Images = new FS.Collection('images', {
@@ -28,17 +30,29 @@ GalleryMain = React.createClass({
     })
   },
 
+  try(func) {
+    try {
+      return func();
+    } catch(e) {
+      console.log('e: ' + e);
+    }
+  },
+
+  renderImages() {
+    this.props.item.images.map( imageUrl => {
+      return <img src={imageUrl} height="75px"> </img>
+    })
+  },
+
   render() {
+    console.log('GalleryMain item: ' + Object.keys(this.props.item));
     console.log('GalleryMain: ');
     return <div className="row">
       <div className="col-xs-6">
         <AutoForm fields={fields}
           {...this.props} />
 
-        {this.props.item.images.map( imageUrl => {
-          return <img src={imageUrl} height="75px"> </img>
-          })
-          }
+        {this.try(this.renderImages)}
         <input type="file" onChange={this.upload}/>
 
       </div>

@@ -127,11 +127,6 @@ ReportConfigEditor = React.createClass({
     if (this.props.editConfigMode) {
       addKeyUtils = <div>
         <button onClick={this.addMode}>Add Key</button>
-
-        <SimpleModal name='Structure' label='Structure'
-                     value={JSON.stringify(this.props.item, null, 4)}/>
-        <SimpleModal name='Result' label='Result'
-                     value={JSON.stringify(this.props.item._result, null, 4)}/>
       </div>
     }
 

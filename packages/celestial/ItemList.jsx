@@ -16,34 +16,33 @@ ItemList = React.createClass({
   },
 
   deleteItem(e) {
-    //if (confirm("Are you sure?")) {
+    if (confirm("Are you sure?")) {
       console.log('delete: ' + e.target.value);
       this.props.module.collection.remove(e.target.value);
-    //}
+    }
   },
 
   render() {
     var items = this.data.items.map(i => {
       return <li className="list-group-item">
-          <div>
-        <a href={'/'+this.props.module.name+'/' + i._id + '/main'}
-      className="tooltip"
-        >
+        <div>
+          <a href={'/'+this.props.module.name+'/' + i._id + '/main'}
+             className="tooltip"
+          >
             {i.name}
-        </a>
-            <div className="right grayed">{i._id}</div>
+          </a>
+          <div className="right grayedSmall">{i._id}
             <button value={i._id} onClick={this.deleteItem}>Delete</button>
-            <a href="#" onClick={this.deleteItem}>[X]</a>
           </div>
+        </div>
       </li>
     })
 
     return <div>
-      <h3>{this.data.items.length} Items found</h3>
-      <input type='button'
-             onClick={this.newItem}
-             value='Create New Item'/>
-      <hr />
+      <h3>{this.data.items.length} {this.props.module.name}s found
+      </h3>
+      <input type='button' onClick={this.newItem}
+             value={'Create new ' + this.props.module.name}/>
       <ul className="list">
         {items}
       </ul>

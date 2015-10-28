@@ -22,6 +22,10 @@
     display:inline;
 }
 
+.fw {
+    width: 100%;
+}
+
 .nav-cell {
     padding-left: 15px;
     padding-right: 15px;
@@ -29,6 +33,10 @@
 
 .pad-cell {
     padding: 15px;
+}
+
+.vpad {
+    padding-bottom: 20px;
 }
 
 .right {

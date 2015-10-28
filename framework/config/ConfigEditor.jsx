@@ -21,9 +21,10 @@ ConfigEditor = React.createClass({
   },
 
   insertKey() {
-    console.log('insertKey: ' + this.state.newKey);
+    const newKey = `${this.props.docPath}.${this.state.newKey}`;
+    console.log('insertKey: ' + newKey);
     let obj = {}
-    obj[this.state.newKey] = {}
+    obj[newKey] = {}
     this.props.module.collection.update(this.props.item._id, {"$set": obj})
     this.changeKey(this.state.newKey)
   },
@@ -36,9 +37,10 @@ ConfigEditor = React.createClass({
   },
 
   deleteKey() {
-    console.log('deleteKey: ' + this.state.selectedKey);
+    const key = `${this.props.docPath}.${this.state.selectedKey}`;
+    console.log('deleteKey: ' + key);
     let obj = {}
-    obj[this.state.selectedKey] = ''
+    obj[key] = ''
     this.props.module.collection.update(this.props.item._id, {"$unset": obj})
   },
 
@@ -63,6 +65,7 @@ ConfigEditor = React.createClass({
 
   renderKeys() {
     const keys = Object.keys(this.props.item);
+    console.log('renderKeys keys: ' + keys);
     return keys.sort().map((it, i) => {
       return <div key={i}>
         <a href='#' onClick={this.changeKey.bind(this,it)}>{it}</a>
@@ -70,65 +73,69 @@ ConfigEditor = React.createClass({
     });
   },
 
-  renderDefaultValueEditor() {
-    if (this.props.children) {
-      console.log('has Children: ' );
-      return;
-    } else {
-      console.log('no Children: ' );
-    }
-    return (
-      <div>
-      <textarea rows='25' cols='100'
-                valueLink={this.linkState('selectedValue')}/>
-      <button onClick={this.updateValue}>Update Value</button>
-    </div>)
-  },
-
-  renderMain() {
-    if (this.state.selectedKey) {
-      return <div>
-        <div className='row'>
+  renderKeyEditor() {
+    if (this.props.editConfigMode) {
+      if (this.state.selectedKey) {
+        return <div>
           <input type="text" valueLink={this.linkState('selectedKey')}/>
           <button onClick={this.updateKey}>Update Key</button>
           <button onClick={this.deleteKey}>Delete Key</button>
-          <SimpleModal name='State' label='State'
-                       value={JSON.stringify(this.props.state, null, 4)}/>
-
         </div>
-        <div className='row'>
-          {this.props.children}
-          {this.renderDefaultValueEditor()}
+      }
+      else {
+        return <div>
+          <input type="text" valueLink={this.linkState('newKey')}/>
+          <button onClick={this.insertKey}>Insert Key</button>
         </div>
-      </div>
+      }
     }
-    else {
-      return <div>
-        <input type="text" valueLink={this.linkState('newKey')}/>
-        <button onClick={this.insertKey}>Insert Key</button>
+  },
+
+  renderValueEditor() {
+    if (this.state.selectedKey) {
+      let defaultValueEditor;
+      if (!this.props.children) {
+        defaultValueEditor = <div>
+          <textarea rows='25' cols='100'
+                valueLink={this.linkState('selectedValue')}/>
+          <button onClick={this.updateValue}>Update Value</button>
+        </div>
+      }
+
+      return <div className='row'>
+        {this.props.children}
+        {defaultValueEditor}
       </div>
     }
   },
 
   render() {
-    //console.log('this.state: ' + JSON.stringify(this.state));
+
+    let addKeyUtils
+    if (this.props.editConfigMode) {
+      addKeyUtils = <div>
+        <button onClick={this.addMode}>Add Key</button>
+
+        <SimpleModal name='Structure' label='Structure'
+                     value={JSON.stringify(this.props.item, null, 4)}/>
+        <SimpleModal name='Result' label='Result'
+                     value={JSON.stringify(this.props.item._result, null, 4)}/>
+      </div>
+    }
+
+      //console.log('this.state: ' + JSON.stringify(this.state));
     return (
       <div>
         <div className='row'>
           <div className='col-xs-3'>
             <div className='reportSections orange'>
               {this.renderKeys()}
-              <button onClick={this.addMode}>Add Key</button>
-
-              <SimpleModal name='Structure' label='Structure'
-                           value={JSON.stringify(this.props.item, null, 4)}/>
-              <SimpleModal name='Result' label='Result'
-                           value={JSON.stringify(this.props.item._result, null, 4)}/>
-
+              {addKeyUtils}
             </div>
           </div>
           <div className='col-xs-9'>
-            {this.renderMain()}
+            {this.renderKeyEditor()}
+            {this.renderValueEditor()}
           </div>
         </div>
       </div>

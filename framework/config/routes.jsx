@@ -3,11 +3,11 @@
 reportConfigEditor = function (Component, section) {
   return React.createClass({
 
-    afterUpdateValue(selKey,selValue) {
+    afterUpdateValue(selKey, selValue) {
       //convert to array
       //const prefix = selKey.split(':')[0]
       const parr = selKey.split('::')
-      const prefix = parr[parr.length-2]
+      const prefix = parr[parr.length - 2]
       let converted = selValue.split("\n");
       let result = [];
       converted.map((line, i) => {
@@ -17,7 +17,7 @@ reportConfigEditor = function (Component, section) {
         line = line.replace(/^\s+|\s+$/g, '')
         if (line.indexOf("::") > -1) {
           let split = line.split('::')
-          result.push([split[0],split[1]])
+          result.push([split[0], split[1]])
         }
         else if (line.length > 0) {
           result.push([prefix + '-' + (i + 1), line])
@@ -52,46 +52,91 @@ moduleConfigEditor = function (Component, section) {
 
     render() {
       console.log('render moduleConfigEditor: ');
-      return <ConfigEditor module="config" afterUpdateValue={this.afterUpdateValue} {...this.props} />
+      return <ConfigEditor editConfigMode={true} module="config"
+                           afterUpdateValue={this.afterUpdateValue} {...this.props} />
     }
   })
 };
 
+reportTypeEditor = function () {
+  return React.createClass({
+    render() {
+      console.log('render reportTypeEditor: ');
+      return <ReportTypeEditor editConfigMode={true} {...this.props} />
+    }
+  })
+}
+
+//const element = React.createElement(ReportTypeEditor, {
+//  editConfigMode: true
+//});
 
 const codeGenRoutes = [
   ['path', 'name', 'content', 'label'],
   ['/:id/main', 'main', ConfigEditor],
-  ['/:id/module', 'module', moduleConfigEditor()],
-  ['/:id/report', 'report', reportConfigEditor()],
-  ['/:id/report2', 'report2', ReportTypeEditor],
+  ['/:id/topLevel', 'topLevel', moduleConfigEditor()],
+  //['/:id/report', 'report', reportConfigEditor()],
+  ['/:id/report', 'report', reportTypeEditor()],
 ];
+
+function newReport() {
+  Meteor.call('newReportConfig', function (error, commentId) {
+    if (error) {
+      throwError(error.reason);
+    }
+  });
+}
 
 const configModule = {
   name: 'config',
   collection: Configs,
+  itemFactory: newReport,
   layout: Layout,
   routes: convertToArrayOfObjects(codeGenRoutes)
 };
 
-ConfigList = React.createClass({
-  newModule() {
-    Configs.insert({
-      _meta: {
-        class: 'module',
-        schema: ['name', 'routes_input']
-      },
-      name: 'New Module',
-      routes: ''
+Meteor.methods({
+  newReportConfig: function () {
+    _id = Configs.insert({
+      name: "New Report Config",
+      report: {}
+    })
+    let obj = {}
+    obj['report._id'] = _id
+    Configs.update(_id, {"$set": obj})
+    return _id;
+  }
+});
 
-    });
-  },
+
+ConfigList = React.createClass({
+  //newModule() {
+  //  Configs.insert({
+  //    _meta: {
+  //      class: 'module',
+  //      schema: ['name', 'routes_input']
+  //    },
+  //    name: 'New Module',
+  //    routes: ''
+  //
+  //  });
+  //},
+  //
+  //newReport() {
+  //  Meteor.call('newReportConfig', function(error, commentId) {
+  //    if (error){
+  //      throwError(error.reason);
+  //    }
+  //  });
+  //},
+
+  //<input type='button'
+  //       onClick={this.newReport()}
+  //       value='Create New Report'/>
 
   render() {
     console.log('confList: ');
-    return <ItemList module={configModule} >
-      <input type='button'
-             onClick={this.newModule}
-             value='Create New Module'/>
+    return <ItemList module={configModule}>
     </ItemList>
   }
 })
@@ -103,7 +148,8 @@ Reaktor.init(
 
     <Route path="/config/list"
            layout={Layout}
-           content={ConfigList} />
+           content={ConfigList}/>
   </Router>);
 
-;
+
+

@@ -71,8 +71,9 @@ ReportTypeEditor = React.createClass({
     const dotKey = `report.${this.state.selectedKey}.items.${e.target.name}.show`;
     console.log('setChecked selKey: ' + dotKey + ', ' + this.getReportItem()._id);
     obj[dotKey] = e.target.checked
-    this.props.module.collection.update(this.getReportItem()._id, {"$set" : obj})
+    this.props.module.collection.update(this.getReportItem()._id, {"$set": obj})
   },
+
 
   renderItemsTable() {
     let addItems
@@ -84,16 +85,23 @@ ReportTypeEditor = React.createClass({
 
     }
     return <div className="fw">
-      <h3>List items</h3>
+      <h3>{this.state.selectedKey} items</h3>
       {this.getItems().map( (item, i) => {
         //return <div>item: {item}</div>
         return <div>
-              <input
-                name={i}
-                type='checkbox'
-                onChange={this.setChecked}
-                checked={item.show} />
-              {item.value}
+          <input
+            name={i}
+            type='checkbox'
+            onChange={this.setChecked}
+            checked={item.show}/>
+          {item.value} <a href={'#openModal' + 'LI_' + i}>edit</a>
+          <TextboxModal value={item.value}
+                        itemKey={item.key}
+            {...this.props}
+                        name={'LI_' + i}
+                        selKey={this.state.selectedKey}
+                        id={this.getReportItem()._id}
+          />
         </div>
         })}
       {addItems}
@@ -105,7 +113,7 @@ ReportTypeEditor = React.createClass({
     var obj = {}
     //obj[this.props.section + "." + e.target.name] = e.target.value
     obj[`report.${e.target.name}`] = e.target.value
-    this.props.collection.update(this.props.item._id, {"$set" : obj})
+    this.props.collection.update(this.props.item._id, {"$set": obj})
   },
 
   render() {
@@ -136,6 +144,65 @@ ReportTypeEditor = React.createClass({
       </div>)
   }
 })
+
+TextboxModal = React.createClass({
+  onEditItemValue(e) {
+    let obj = {};
+    console.log('onEditItem e.target.name: ' + e.target.name);
+    const arrKey = e.target.name.split('_')[1];
+    const dotKey = `report.${this.props.selKey}.items.${arrKey}.value`;
+    console.log('onEditItem dotKey: ' + dotKey + ', ' + this.props.id);
+    obj[dotKey] = e.target.value;
+    this.setState({
+      value_obj: obj,
+    });
+  },
+
+  onEditItemKey(e) {
+    let obj = {};
+    console.log('onEditItem e.target.name: ' + e.target.name);
+    const arrKey = e.target.name.split('_')[1];
+    const dotKey = `report.${this.props.selKey}.items.${arrKey}.key`;
+    console.log('onEditItem dotKey: ' + dotKey + ', ' + this.props.id);
+    obj[dotKey] = e.target.value;
+    this.setState({
+      key_obj: obj,
+    });
+  },
+
+  save() {
+    if (this.state.value_obj) {
+      console.log('save: ' + JSON.stringify(this.state.value_obj));
+      this.props.module.collection.update(this.props.id, {"$set": this.state.value_obj})
+    }
+    if (this.state.key_obj) {
+      console.log('save: ' + JSON.stringify(this.state.key_obj));
+      this.props.module.collection.update(this.props.id, {"$set": this.state.key_obj})
+    }
+  },
+
+
+  render() {
+    return (
+      <div>
+
+        <div id={'openModal' + this.props.name} className="modalDialog">
+          <div><a href="#close" title="Close" className="close" onClick={this.save}>X</a>
+            <input type="text"
+                   name={'itemkey' + this.props.name}
+                   defaultValue={this.props.itemKey}
+                   onChange={this.onEditItemKey}
+            />
+            <textarea rows='5' cols='50' name={this.props.name}
+                      defaultValue={this.props.value}
+                      onChange={this.onEditItemValue}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
 
 
 

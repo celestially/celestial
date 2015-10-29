@@ -1,10 +1,10 @@
 Gallery = new Mongo.Collection('gallery');
 
-var imageStore = new FS.Store.GridFS('images');
-
-Images = new FS.Collection('images', {
-  stores: [imageStore]
-});
+//var imageStore = new FS.Store.GridFS('images');
+//
+//Images = new FS.Collection('images', {
+//  stores: [imageStore]
+//});
 
 const fields = ['gallery_name', 'gallery_desc']
 

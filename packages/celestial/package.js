@@ -24,6 +24,7 @@ Package.onUse(function(api) {
     'init.js',
     'nav.jsx',
     'ItemWrapper.jsx',
+    'KeyedItemWrapper.jsx',
     'ItemList.jsx',
     'ConfigItemWrapper.jsx',
     'routeUtils.jsx',
@@ -31,6 +32,7 @@ Package.onUse(function(api) {
 
   api.export('celestial');
   api.export('ItemList');
+  api.export('KeyedItemWrapper');
 });
 
 //Package.onTest(function(api) {

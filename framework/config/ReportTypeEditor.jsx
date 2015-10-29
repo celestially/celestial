@@ -170,7 +170,7 @@ ReportTypeEditor = React.createClass({
   }
 })
 
-TextboxModal = React.createClass({
+TextboxModalXX = React.createClass({
   onEditItemValue(e) {
     let obj = {};
     console.log('onEditItem e.target.name: ' + e.target.name);

@@ -85,24 +85,38 @@ CheckboxList = React.createClass({
 
   renderCheckboxes() {
     if (!this.getReportItem()[this.props.selectedKey].hideSection) {
-    return this.getItems().map((item, i) => {
-      //return <div>item: {item}</div>
       return <div>
-        <input
-          name={i}
-          type='checkbox'
-          onChange={this.setChecked}
-          checked={item.show}/>
-        {item.value} <a href={'#openModal' + 'LI_' + i}>edit</a>
-        <TextboxModal value={item.value}
-                      itemKey={item.key}
-          {...this.props}
-                      name={'LI_' + i}
-                      selKey={this.props.selectedKey}
-                      id={this.getReportItem()._id}
-        />
+        {!this.props.editConfigMode ?
+        <div className="vpad">{this.getReportItem()[this.props.selectedKey].description}</div>
+          : null}
+
+        {this.getItems().map((item, i) => {
+          //return <div>item: {item}</div>
+          let tempValue = item.value;
+          if (item.params) {
+            let params = item.params.split(',')
+            params.map( (param, i) => {
+              tempValue = tempValue.replace(`{{param${i+1}}}`, `<span class="yellow">${params[i]}</span>`);
+              })
+            }
+          return <div>
+            <input
+              name={i}
+              type='checkbox'
+              onChange={this.setChecked}
+              checked={item.show}/>
+            <span dangerouslySetInnerHTML={{__html: tempValue}}/> <a href={'#openModal' + 'LI_' + i}>edit</a>
+            <TextboxModal value={item.value}
+                          itemKey={item.key}
+              {...this.props}
+                          name={'LI_' + i}
+                          selKey={this.props.selectedKey}
+                          id={this.getReportItem()._id}
+            />
+          </div>
+          })
+          }
       </div>
-    })
     }
   },
 
@@ -110,12 +124,12 @@ CheckboxList = React.createClass({
     console.log('renderItemsList this.getReportItem(): ' + this.getReportItem())
     console.log('renderItemsList this.props.selectedKey: ' + this.props.selectedKey)
     let addItems
-    //if (this.props.editConfigMode) {
+    if (this.props.editConfigMode) {
       addItems = <div>
         <textarea rows='5' cols='50' valueLink={this.linkState('selectedValue')}/>
         <button onClick={this.addItems}>Add Items</button>
       </div>
-    //}
+    }
 
     try {
       return <div className="fw">
@@ -125,7 +139,6 @@ CheckboxList = React.createClass({
           type='checkbox'
           onChange={this.setSectionChecked}
           checked={this.getReportItem()[this.props.selectedKey].hideSection}/> hidden
-
         </h3>
         {this.renderCheckboxes()}
         {addItems}
@@ -154,14 +167,18 @@ CheckboxList = React.createClass({
 
     const topFields = ['description', 'sectionKey']
 
+    let af;
+    if (this.props.editMode) {
+      af = <div className="fw">
+        <AutoForm fields={topFields}
+                  topKey='report'
+                  subKey={this.props.selectedKey} {...this.props} />
+      </div>
+    }
 
     return (
       <div>
-        <div className="fw">
-          <AutoForm fields={topFields}
-                    topKey='report'
-                    subKey={this.props.selectedKey} {...this.props} />
-        </div>
+        {af}
         {this.renderItemsList()}
       </div>)
   }
@@ -192,6 +209,18 @@ TextboxModal = React.createClass({
     });
   },
 
+  onEditItemParams(e) {
+    let obj = {};
+    console.log('onEditItemParams e.target.name: ' + e.target.name);
+    const arrKey = e.target.name.split('_')[1];
+    const dotKey = `report.${this.props.selKey}.items.${arrKey}.params`;
+    console.log('onEditItemParams dotKey: ' + dotKey + ', ' + this.props.id);
+    obj[dotKey] = e.target.value;
+    this.setState({
+      param_obj: obj,
+    });
+  },
+
   save() {
     if (this.state.value_obj) {
       console.log('save: ' + JSON.stringify(this.state.value_obj));
@@ -200,6 +229,10 @@ TextboxModal = React.createClass({
     if (this.state.key_obj) {
       console.log('save: ' + JSON.stringify(this.state.key_obj));
       this.props.module.collection.update(this.props.id, {"$set": this.state.key_obj})
+    }
+    if (this.state.param_obj) {
+      console.log('save: ' + JSON.stringify(this.state.param_obj));
+      this.props.module.collection.update(this.props.id, {"$set": this.state.param_obj})
     }
   },
 
@@ -217,6 +250,11 @@ TextboxModal = React.createClass({
             <textarea rows='5' cols='50' name={this.props.name}
                       defaultValue={this.props.value}
                       onChange={this.onEditItemValue}
+            />
+            <input type="text"
+                   name={'params' + this.props.name}
+                   defaultValue={this.props.params}
+                   onChange={this.onEditItemParams}
             />
           </div>
         </div>

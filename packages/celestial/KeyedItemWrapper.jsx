@@ -16,6 +16,25 @@ KeyedItemWrapper = function (Component) {
       //this.props.onSelectKey(name);
     },
 
+    renderKeyEditor() {
+      console.log('renderKeyEditor this.state.selectedKey: ' + this.state.selectedKey);
+      return <div id={'openModalKE'} className="modalDialog">
+        <div><a href="#close" title="Close" className="close">X</a>
+          <div>
+            <h3>Edit Key:</h3>
+            <input type="text" />
+            <button onClick={this.updateKey} defaultValue={this.state.selectedKey}>Update Key</button>
+            <button onClick={this.deleteKey}>Delete Key</button>
+          </div>
+          <div>
+            <h3>New Key:</h3>
+            <input type="text" />
+            <button onClick={this.insertKey}>Insert Key</button>
+          </div>
+        </div>
+      </div>
+    },
+
     renderKeys() {
       const keys = Object.keys(this.props.item);
       console.log('renderKeys keys: ' + keys);
@@ -39,6 +58,8 @@ KeyedItemWrapper = function (Component) {
             <div className='col-xs-3'>
               <div className='reportSections orange'>
                 {this.renderKeys()}
+                <a href={'#openModalKE'}>Add/Edit Key</a>
+                {this.renderKeyEditor()}
               </div>
             </div>
             <div className='col-xs-9'>

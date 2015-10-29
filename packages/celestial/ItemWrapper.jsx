@@ -24,6 +24,11 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
         return <div>Key not found</div>;
       }
 
+      //add update method to item
+      item.updateItem = function() {
+        alert('yay');
+      }
+
       console.log('ItemWrapper item: ' + Object.keys(item));
       console.log('ItemWrapper dotKey: ' + dotKey);
       return <div>

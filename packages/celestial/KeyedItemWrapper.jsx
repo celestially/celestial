@@ -17,7 +17,7 @@ KeyedItemWrapper = function (Component) {
     },
 
     renderKeys() {
-      const keys = Object.keys(this.props.item.report);
+      const keys = Object.keys(this.props.item);
       console.log('renderKeys keys: ' + keys);
       return keys.sort().map((it, i) => {
         //if (!hideSectionMap[this.props.item.report[it].sectionKey]) {
@@ -29,6 +29,10 @@ KeyedItemWrapper = function (Component) {
     },
 
     render() {
+      console.log('KeyedItemWrapper item: ' + Object.keys(this.props.item));
+      console.log('KeyedItemWrapper this.props.dotKey: ' + this.props.dotKey);
+      console.log('KeyedItemWrapper this.props.dotKey: ' + this.state.selectedKey);
+      this.state.selectedKey && console.log('KeyedItemWrapper subitem: ' + Object.keys(this.props.item[this.state.selectedKey]));
       return (
         <div>
           <div className='row'>
@@ -39,7 +43,10 @@ KeyedItemWrapper = function (Component) {
             </div>
             <div className='col-xs-9'>
               {this.state.selectedKey &&
-              <Component item={this.props.item[this.state.selectedKey]} {...this.props} />}
+              <Component {...this.props}
+                item={this.props.item[this.state.selectedKey]}
+                dotKey={this.props.dotKey+'.'+this.state.selectedKey}
+                 />}
             </div>
           </div>
         </div>

@@ -23,6 +23,7 @@ Package.onUse(function(api) {
   api.addFiles([
     'init.js',
     'nav.jsx',
+    'utils.jsx',
     'ItemWrapper.jsx',
     'KeyedItemWrapper.jsx',
     'ItemList.jsx',

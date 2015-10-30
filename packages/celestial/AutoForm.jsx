@@ -28,11 +28,12 @@ AutoForm = React.createClass({
     const keys = Object.keys(this.state.modifiedFields)
     keys.map( field => {
       let value = this.state.modifiedFields[field];
-      const dotKey = `${this.props.dotKey}.${field}`;
-      console.log(`save: ${dotKey},${value},${this.props._id}`);
-      let obj = {};
-      obj[dotKey] = value;
-      this.props.collection.update(this.props._id, {"$set": obj})
+      //const dotKey = `${this.props.dotKey}.${field}`;
+      //console.log(`save: ${dotKey},${value},${this.props._id}`);
+      //let obj = {};
+      //obj[dotKey] = value;
+      //this.props.collection.update(this.props._id, {"$set": obj})
+      celestial.updateItem(this.props, field, value);
     })
   },
 

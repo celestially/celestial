@@ -39,24 +39,7 @@ reportConfigEditor = function (Component, section) {
   })
 };
 
-moduleConfigEditor = function (Component, section) {
-  return React.createClass({
 
-    afterUpdateValue() {
-      console.log('afterUpdateValue: ');
-      const routes = this.props.item['routes']
-      template = `moduleRoutes = ${routes}`
-      Configs.update(this.props.item._id,
-        {"$set": {_generated: template}})
-    },
-
-    render() {
-      console.log('render moduleConfigEditor: ');
-      return <ConfigEditor editConfigMode={true} module="config"
-                           afterUpdateValue={this.afterUpdateValue} {...this.props} />
-    }
-  })
-};
 
 reportTypeEditor = function () {
   return React.createClass({
@@ -73,8 +56,8 @@ reportTypeEditor = function () {
 
 const codeGenRoutes = [
   ['path', 'name', 'content', 'label'],
-  ['/:id/main', 'main', ConfigEditor],
-  ['/:id/topLevel', 'topLevel', moduleConfigEditor()],
+  //['/:id/main', 'main', ConfigEditor],
+  //['/:id/topLevel', 'topLevel', TopLevelKeyEditor],
   //['/:id/report', 'report', reportConfigEditor()],
   ['/:id/report', 'report', reportTypeEditor()],
 ];

@@ -37,15 +37,15 @@ KeyedItemWrapper = function (Component) {
     },
 
     deleteKey() {
-      const key = `report.${this.state.selectedKey}`;
-      console.log('deleteKey: ' + key);
+      const selectedKey = `${this.props.dotKey}.${this.state.selectedKey}`;
       let obj = {}
-      obj[key] = ''
-      this.props.module.collection.update(this.props.item._id, {"$unset": obj})
+      obj[selectedKey] = ''
+      console.log('deleteKey obj: ' + JSON.stringify(obj));
+      this.props.module.collection.update(this.props._id, {"$unset": obj})
     },
 
     renderKeyEditor() {
-      console.log('renderKeyEditor this.state.selectedKey: ' + this.state.selectedKey);
+      //console.log('renderKeyEditor this.state.selectedKey: ' + this.state.selectedKey);
       return <div id={'openModalKE'} className="modalDialog">
         <div><a href="#close" title="Close" className="close">X</a>
           <div>
@@ -65,7 +65,7 @@ KeyedItemWrapper = function (Component) {
 
     renderKeys() {
       const keys = Object.keys(this.props.item);
-      console.log('renderKeys keys: ' + keys);
+      //console.log('renderKeys keys: ' + keys);
       return keys.sort().map((it, i) => {
         //if (!hideSectionMap[this.props.item.report[it].sectionKey]) {
         return <div key={i}>
@@ -76,10 +76,10 @@ KeyedItemWrapper = function (Component) {
     },
 
     render() {
-      console.log('KeyedItemWrapper item: ' + Object.keys(this.props.item));
-      console.log('KeyedItemWrapper this.props.dotKey: ' + this.props.dotKey);
-      console.log('KeyedItemWrapper this.props.dotKey: ' + this.state.selectedKey);
-      this.state.selectedKey && console.log('KeyedItemWrapper subitem: ' + Object.keys(this.props.item[this.state.selectedKey]));
+      //console.log('KeyedItemWrapper item: ' + Object.keys(this.props.item));
+      //console.log('KeyedItemWrapper this.props.dotKey: ' + this.props.dotKey);
+      //console.log('KeyedItemWrapper this.props.dotKey: ' + this.state.selectedKey);
+      //this.state.selectedKey && console.log('KeyedItemWrapper subitem: ' + Object.keys(this.props.item[this.state.selectedKey]));
       return (
         <div>
           <div className='row'>

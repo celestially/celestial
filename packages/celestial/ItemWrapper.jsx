@@ -41,8 +41,8 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
         return <div>Key not found</div>;
       }
 
-      console.log('ItemWrapper item: ' + Object.keys(item));
-      console.log('ItemWrapper dotKey: ' + dotKey);
+      //console.log('ItemWrapper item: ' + Object.keys(item));
+      //console.log('ItemWrapper dotKey: ' + dotKey);
       return <div>
         {celestial.getNavItems(section, module, this.data.item._id, this.data.item)}
 

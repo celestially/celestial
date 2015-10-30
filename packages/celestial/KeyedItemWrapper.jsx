@@ -86,6 +86,7 @@ KeyedItemWrapper = function (Component) {
             <div className='col-xs-3'>
               <div className='reportSections orange'>
                 {this.renderKeys()}
+                <hr/>
                 <a href={'#openModalKE'}>Add/Edit Key</a>
                 {this.renderKeyEditor()}
               </div>
@@ -95,6 +96,7 @@ KeyedItemWrapper = function (Component) {
               <Component {...this.props}
                 item={this.props.item[this.state.selectedKey]}
                 dotKey={this.props.dotKey+'.'+this.state.selectedKey}
+                keyName={this.state.selectedKey}
                  />}
             </div>
           </div>

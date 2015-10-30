@@ -40,6 +40,10 @@
     padding: 15px;
 }
 
+.section-cell {
+    margin: 5px;
+}
+
 .vpad {
     padding-bottom: 20px;
     top: 20px;

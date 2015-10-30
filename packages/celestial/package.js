@@ -28,11 +28,15 @@ Package.onUse(function(api) {
     'ItemList.jsx',
     'ConfigItemWrapper.jsx',
     'routeUtils.jsx',
+    'ModalWrapper.jsx',
+    'AutoForm.jsx',
     ]);
 
   api.export('celestial');
   api.export('ItemList');
   api.export('KeyedItemWrapper');
+  api.export('ModalWrapper');
+  api.export('AutoForm');
 });
 
 //Package.onTest(function(api) {

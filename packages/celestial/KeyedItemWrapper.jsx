@@ -16,6 +16,33 @@ KeyedItemWrapper = function (Component) {
       //this.props.onSelectKey(name);
     },
 
+    insertKey() {
+      const newKey = `${this.props.dotKey}.${this.state.newKey}`;
+      console.log('insertKey: ' + newKey);
+      let obj = {}
+      obj[newKey] = {}
+      this.props.collection.update(this.props._id, {"$set": obj})
+      this.changeKey(this.state.newKey)
+    },
+
+    updateKey() {
+      const oldKey = `${this.props.dotKey}.${this.state.oldKey}`;
+      const selectedKey = `${this.props.dotKey}.${this.state.selectedKey}`;
+      console.log('updateKey: ' + oldKey + ', ' + selectedKey);
+      let obj = {}
+      obj[oldKey] = selectedKey
+      console.log('obj: ' + JSON.stringify(obj));
+      this.props.collection.update(this.props._id, {"$rename": obj})
+    },
+
+    deleteKey() {
+      const key = `report.${this.state.selectedKey}`;
+      console.log('deleteKey: ' + key);
+      let obj = {}
+      obj[key] = ''
+      this.props.module.collection.update(this.props.item._id, {"$unset": obj})
+    },
+
     renderKeyEditor() {
       console.log('renderKeyEditor this.state.selectedKey: ' + this.state.selectedKey);
       return <div id={'openModalKE'} className="modalDialog">

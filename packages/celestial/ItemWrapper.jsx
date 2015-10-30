@@ -1,17 +1,34 @@
 celestial.ItemWrapper = function (Component, section, module, docKey) {
 
-  let collection = module.context? module.context : module.collection;
+  const collection = module.context? module.context : module.collection;
 
   return React.createClass({
     mixins: [ReactMeteorData],
 
     getMeteorData() {
+      let item = collection.findOne({_id: this.props.params.id});
+      //item.updateItem = function(op, key, value) {
+      //  let obj = {}
+      //  //const dotKey = `${dotKey}.${key}`;
+      //  console.log(`ItemWrapper.updateItem: ${key},${value},${this.props._id}`);
+      //  obj[key] = value
+      //  collection.update(this.data.item._id, {op: obj})
+      //}
       return {
-        item: collection.findOne({_id: this.props.params.id})
+        item: item
       };
     },
 
-    render() {
+    //this doesn't work, why?
+    updateItem(op, key, value) {
+      let obj = {}
+      //const dotKey = `${dotKey}.${key}`;
+      console.log(`ItemWrapper.updateItem: ${key},${value},${this.props._id}`);
+      obj[key] = value
+      collection.update(this.data.item._id, {op: obj})
+    },
+
+  render() {
       if (!this.data.item) {
         return <div>404: Not found</div>;
       }
@@ -24,11 +41,6 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
         return <div>Key not found</div>;
       }
 
-      //add update method to item
-      item.updateItem = function() {
-        alert('yay');
-      }
-
       console.log('ItemWrapper item: ' + Object.keys(item));
       console.log('ItemWrapper dotKey: ' + dotKey);
       return <div>
@@ -38,6 +50,7 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
                    collection={collection}
                    _id={this.data.item._id}
                    module={module}
+                   updateItem={this.updateItem}
                    dotKey={dotKey} {...this.props} />
       </div>
     }

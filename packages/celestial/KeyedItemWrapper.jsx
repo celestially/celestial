@@ -1,5 +1,6 @@
 KeyedItemWrapper = function (Component) {
   return React.createClass({
+    mixins: [React.addons.LinkedStateMixin],
 
     getInitialState: function () {
       return {
@@ -49,13 +50,13 @@ KeyedItemWrapper = function (Component) {
         <div><a href="#close" title="Close" className="close">X</a>
           <div>
             <h3>Edit Key:</h3>
-            <input type="text" />
+            <input type="text" valueLink={this.linkState('selectedKey')}/>
             <button onClick={this.updateKey} defaultValue={this.state.selectedKey}>Update Key</button>
             <button onClick={this.deleteKey}>Delete Key</button>
           </div>
           <div>
             <h3>New Key:</h3>
-            <input type="text" />
+            <input type="text" valueLink={this.linkState('newKey')}/>
             <button onClick={this.insertKey}>Insert Key</button>
           </div>
         </div>

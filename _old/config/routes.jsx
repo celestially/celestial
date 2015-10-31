@@ -71,7 +71,7 @@ function newReport() {
 }
 
 const configModule = {
-  name: 'config',
+  name: 'config2',
   collection: Configs,
   itemFactory: newReport,
   layout: Layout,
@@ -129,7 +129,7 @@ Reaktor.init(
 
     {celestial.createRoutes(configModule)}
 
-    <Route path="/config/list"
+    <Route path="/config2/list"
            layout={Layout}
            content={ConfigList}/>
   </Router>);

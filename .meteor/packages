@@ -23,11 +23,6 @@ reload
 random
 ejson
 check
-meteorhacks:npm
-cosmos:browserify
 celestial:celestial
 cfs:standard-packages
 cfs:gridfs
-stevezhu:lodash
-
-npm-container

@@ -4,7 +4,7 @@ celestial.ConfigItemWrapper = function (Component, configName) {
 
     getMeteorData() {
       return {
-        item: Configs.findOne({name: configName})
+        item: Prototypes.findOne({name: configName})
       };
     },
 

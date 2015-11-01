@@ -33,10 +33,14 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
         return <div>404: Not found</div>;
       }
 
-      let item = module.context? this.data.item[module.name]
-        : docKey? this.data.item[docKey] : this.data.item;
-      let dotKey = module.context? module.name
-        : docKey? docKey : '';
+      //let item = module.context? this.data.item[module.name]
+      //  : docKey? this.data.item[docKey] : this.data.item;
+      //let dotKey = module.context? module.name
+      //  : docKey? docKey : '';
+
+      let item = this.data.item;
+      let dotKey = docKey? docKey : '';
+
       if (!item) {
         return <div>Key not found</div>;
       }

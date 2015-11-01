@@ -30,7 +30,7 @@ GalleryMain = React.createClass({
     })
   },
 
-  try(func) {
+  tryRender(func) {
     try {
       return func();
     } catch(e) {
@@ -52,7 +52,7 @@ GalleryMain = React.createClass({
         <AutoForm fields={fields}
           {...this.props} />
 
-        {this.try(this.renderImages)}
+        {this.tryRender(this.renderImages)}
         <input type="file" onChange={this.upload}/>
 
       </div>

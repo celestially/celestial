@@ -33,16 +33,27 @@ celestial.ItemWrapper = function (Component, section, module, docKey) {
         return <div>404: Not found</div>;
       }
 
-      let item = module.context? this.data.item[module.name]
-        : docKey? this.data.item[docKey] : this.data.item;
-      let dotKey = module.context? module.name
-        : docKey? docKey : '';
+      let item =
+        //module.context? this.data.item[module.name] :
+          docKey? this.data.item[docKey] : this.data.item;
+      let dotKey =
+        //module.context? module.name :
+        docKey? docKey : '';
 
       //let item = this.data.item;
       //let dotKey = docKey? docKey : '';
 
       if (!item) {
-        return <div>Key not found</div>;
+        if (docKey) {
+          //create path for this key
+          console.log(`ItemWrapper create path for item key: ${dotKey},${this.data.item._id}`);
+          let obj = {};
+          obj[dotKey] = {};
+          module.collection.update(this.data.item._id, {"$set": obj})
+        }
+        //else {
+          return <div>Key not found</div>;
+        //}
       }
 
       //console.log('ItemWrapper item: ' + Object.keys(item));

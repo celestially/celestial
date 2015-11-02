@@ -5,6 +5,9 @@ TextInput = React.createClass({
       //this.setState({editing: false})
     }
   },
+  componentDidMount: function(){
+    React.findDOMNode(this.refs.fieldName).select();
+  },
   save: function(e){
       celestial.updateItem(this.props, 'value', e.target.value);
   },

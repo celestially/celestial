@@ -7,7 +7,7 @@ FormEditor = React.createClass({
   addField(blockType) {
     //!this.props.item.blocks && this.createBlocksKey();
     let obj = {}
-    const dotKey = this.props.dotKey ? `${this.props.dotKey}.value` : 'value'
+    const dotKey = `${this.props.dotKey}.value`;
     console.log(`addField: ${dotKey},${this.props._id}`);
     obj[dotKey] = {}
     obj[dotKey].type = blockType;
@@ -50,7 +50,7 @@ FormEditor = React.createClass({
   renderArray() {
     return keys.map( (name, i) => {
         const field = this.props.item.value[i];
-        //console.log('FormEditor field: ' + JSON.stringify(field));
+        console.log('FormEditor render field: ' + JSON.stringify(field));
         {return field.type == 'string' ? this.renderField(field, i, TextInput) :
           field.type == 'boolean' ? this.renderCheck(field, i, CheckboxInput) :
             field.type == 'array' ? this.renderCollectionField(field, i, false) :
@@ -72,6 +72,7 @@ FormEditor = React.createClass({
   },
 
   render() {
+    console.log('FormEditor render item: ' + JSON.stringify(this.props.item));
     return <div className='green'>
       <h3>Form Editor</h3>
       {this.renderValue()}

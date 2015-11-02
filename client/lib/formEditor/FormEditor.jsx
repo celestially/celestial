@@ -35,10 +35,10 @@ FormEditor = React.createClass({
 
   renderField(field, i, Component) {
     const Comp = FieldEditorWrapper(Component);
-    return <Comp {...this.props} item={field} dotKey={this.props.dotKey + '.value.' + i} />
+    return <Comp {...this.props} item={field} dotKey={this.props.dotKey + '.value.' + i}/>
   },
 
-  renderCollectionField(field, i, asObject) {
+  renderFormField(field, i, asObject) {
     //console.log('FormEditor renderArrayField: ' + JSON.stringify(field));
     const Comp = FieldEditorWrapper(FormEditor);
     return <Comp {...this.props} item={field}
@@ -47,31 +47,17 @@ FormEditor = React.createClass({
     />
   },
 
-  renderObject(keys) {
+  renderKeys(keys) {
     console.log('FormEditor renderArray: ' + JSON.stringify(keys));
-    return keys.map( (name, i) => {
+    return keys.map((name, i) => {
         const field = this.props.item.value[i];
         console.log('FormEditor field: ' + JSON.stringify(field));
-        {return field.type == 'string' ? this.renderField(field, i, TextInput) :
-          field.type == 'boolean' ? this.renderField(field, i, CheckboxInput) :
-            field.type == 'array' ? this.renderCollectionField(field, i, false) :
-              //field.type == 'object' ? this.renderObjectField(field, i) :
-              <span>Unknown type</span>
-        }
-      }
-    )
-  },
-
-  renderArray(keys) {
-    console.log('FormEditor renderArray: ' + JSON.stringify(keys));
-    return keys.map( (name, i) => {
-        const field = this.props.item.value[i];
-        console.log('FormEditor field: ' + JSON.stringify(field));
-        {return field.type == 'string' ? this.renderField(field, i, TextInput) :
-          field.type == 'boolean' ? this.renderField(field, i, CheckboxInput) :
-            field.type == 'array' ? this.renderCollectionField(field, i, false) :
-              //field.type == 'object' ? this.renderObjectField(field, i) :
-              <span>Unknown type</span>
+        {
+          return field.type == 'string' ? this.renderField(field, i, TextInput) :
+            field.type == 'boolean' ? this.renderField(field, i, CheckboxInput) :
+              field.type == 'array' ? this.renderFormField(field, i, false) :
+                //field.type == 'object' ? this.renderObjectField(field, i) :
+                <span>Unknown type</span>
         }
       }
     )
@@ -80,23 +66,15 @@ FormEditor = React.createClass({
   renderValue() {
     let keys = this.props.item &&
       this.props.item.value &&
-      Object.keys( this.props.item.value)
+      Object.keys(this.props.item.value)
     if (!keys) {
       return <div>No keys found</div>
     }
-    if (this.props.asObject) {
-      return <table border="1">
-        <tbody>
-        {this.renderObject(keys)}
-        </tbody>
-      </table>
-    } else {
-      return <table border="1">
-        <tbody>
-        {this.renderArray(keys)}
-        </tbody>
-      </table>
-    }
+    return <table border="1">
+      <tbody>
+      {this.renderKeys(keys)}
+      </tbody>
+    </table>
   },
 
   render() {

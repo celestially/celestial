@@ -38,7 +38,7 @@ FieldEditorWrapper = function (Component) {
     render() {
       //console.log('editFieldName render: ');
       return <tr>
-        <td>
+        <td style={{verticalAlign: 'top', background: 'orange'}}>
           { this.state.editing ?
           <input type='text'
                  onKeyDown={this.save}

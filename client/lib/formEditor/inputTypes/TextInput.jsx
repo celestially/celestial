@@ -5,11 +5,13 @@ TextInput = React.createClass({
       //this.setState({editing: false})
     }
   },
-  componentDidMount: function(){
-    React.findDOMNode(this.refs.fieldName).select();
-  },
+  //componentDidMount: function(){
+  //  React.findDOMNode(this.refs.fieldName).select();
+  //},
   save: function(e){
-      celestial.updateItem(this.props, 'value', e.target.value);
+      celestial.updateItem(this.props,
+        this.props.field ? this.props.field : 'value',
+        e.target.value);
   },
   edit(e) {
     console.log('TextInput: ' );
@@ -20,6 +22,6 @@ TextInput = React.createClass({
     return <input type='text'
                   onChange={this.edit}
                   onBlur={this.save}
-                  defaultValue={this.props.item.value} />
+                  defaultValue={this.props.value ? this.props.value : this.props.item.value} />
   }
 })

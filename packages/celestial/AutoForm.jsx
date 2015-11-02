@@ -51,6 +51,7 @@ AutoForm = React.createClass({
         <td className="meta-head">{field}</td>
         <td><textarea name={field}
                       onChange={this.handleChange}
+                      defaultValue={value}
                       />
         </td>
       </tr>;

@@ -28,3 +28,4 @@ cfs:standard-packages
 cfs:gridfs
 d3js:d3
 mfpierre:chartist-js
+lepozepo:cloudinary

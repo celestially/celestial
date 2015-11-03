@@ -55,6 +55,7 @@ kadira:flow-router@2.7.0
 kadira:react-layout@1.4.1
 kadira:reaktor@1.0.1
 launch-screen@1.0.4
+lepozepo:cloudinary@4.0.3
 livedata@1.0.15
 logging@1.0.8
 meteor@1.1.9

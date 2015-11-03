@@ -25,6 +25,9 @@ FormEditor = React.createClass({
   addForm() {
     this.addField('array')
   },
+  addCollection() {
+    this.addField('collection')
+  },
   clear() {
     let obj = {}
     const dotKey = `${this.props.dotKey}.value`;
@@ -38,12 +41,20 @@ FormEditor = React.createClass({
     return <Comp {...this.props} item={field} dotKey={this.props.dotKey + '.value.' + i}/>
   },
 
-  renderFormField(field, i, asObject) {
+  renderForm(field, i, asObject) {
     //console.log('FormEditor renderArrayField: ' + JSON.stringify(field));
     const Comp = FieldEditorWrapper(FormEditor);
     return <Comp {...this.props} item={field}
                                  dotKey={this.props.dotKey + '.value.' + i}
                                  asObject={asObject}
+    />
+  },
+
+  renderCollection(field, i, asObject) {
+    //console.log('FormEditor renderArrayField: ' + JSON.stringify(field));
+    const Comp = FieldEditorWrapper(CollectionEditor);
+    return <Comp {...this.props} item={field}
+                                 dotKey={this.props.dotKey + '.value.' + i}
     />
   },
 
@@ -55,8 +66,8 @@ FormEditor = React.createClass({
         {
           return field.type == 'string' ? this.renderField(field, i, TextInput) :
             field.type == 'boolean' ? this.renderField(field, i, CheckboxInput) :
-              field.type == 'array' ? this.renderFormField(field, i, false) :
-                //field.type == 'object' ? this.renderObjectField(field, i) :
+              field.type == 'array' ? this.renderForm(field, i, false) :
+              field.type == 'collection' ? this.renderCollection(field, i, false) :
                 <span>Unknown type</span>
         }
       }
@@ -85,6 +96,7 @@ FormEditor = React.createClass({
       <button onClick={this.addText}>Add Text</button>
       <button onClick={this.addCheckbox}>Add Checkbox</button>
       <button onClick={this.addForm}>Add Form</button>
+      <button onClick={this.addCollection}>Add Collection</button>
       <button onClick={this.clear}>Clear</button>
 
       <SimpleModal name='JSON' label='JSON View'

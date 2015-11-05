@@ -19,9 +19,19 @@ TextInput = React.createClass({
   },
   render() {
     console.log('TextInput: ' + this.props.item.value);
-    return <input type='text'
+    return !this.props.allowLink ?
+      <input type='text'
                   onChange={this.edit}
                   onBlur={this.save}
                   defaultValue={this.props.value ? this.props.value : this.props.item.value} />
+      : <div>
+      <input type='text'
+             onChange={this.edit}
+             onBlur={this.save}
+             defaultValue={this.props.value ? this.props.value : this.props.item.value} />
+      <input type="checkbox"
+             onChange={this.unlink} />
+      custom
+      </div>
   }
 })

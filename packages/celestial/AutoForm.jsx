@@ -52,7 +52,20 @@ AutoForm = React.createClass({
         <td><textarea name={field}
                       onChange={this.handleChange}
                       defaultValue={value}
+                      rows="10"
+                      cols="50"
                       />
+        </td>
+      </tr>;
+    });
+    var rows2 = this.props.checkboxFields && this.props.checkboxFields.map((field) => {
+      let value = this.props.item[field] || '';
+      return <tr key={field}>
+        <td className="meta-head">{field}</td>
+        <td>
+          <LinkedCheckbox {...this.props}
+                      property={field}
+        />
         </td>
       </tr>;
     });
@@ -60,9 +73,34 @@ AutoForm = React.createClass({
       <table id="meta">
         <tbody>
         {rows}
+        {rows2}
         </tbody>
       </table>
       <button onClick={this.save}>Save</button>
     </div>;
   }
 })
+
+LinkedCheckbox = React.createClass({
+
+  //doesn't work yet
+  //setChecked(e) {
+  //  const dotKey = `${this.props.dotKey}.${this.props.property}`;
+  //  this.props.updateItem('$set', dotKey, e.target.checked)
+  //},
+
+  setChecked(e) {
+    let obj = {}
+    const dotKey = `${this.props.dotKey}.${this.props.property}`;
+    console.log(`setChecked: ${dotKey},${e.target.value},${e.target.checked},${this.props._id}`);
+    obj[dotKey] = e.target.checked
+    this.props.collection.update(this.props._id, {"$set": obj})
+  },
+
+  render() {
+    return <input
+      type='checkbox'
+      onChange={this.setChecked}
+      checked={this.props.item[this.props.property]}/>
+  }
+});

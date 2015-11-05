@@ -22,8 +22,34 @@ ItemList = React.createClass({
     }
   },
 
+  renderAddCustom() {
+    const AddCustom = React.createClass({
+      newCustomItem() {
+        console.log('AddCustom newCustomItem: ');
+        this.props.module.collection.insert(JSON.parse(this.state.value));
+      },
+      edit(e) {
+        console.log('AddCustom edit: ');
+        this.setState({value: e.target.value})
+      },
+      render() {
+        console.log('AddCustom render: ');
+        return <div>
+          New Doc:
+          <textarea
+                 onChange={this.edit}
+          />
+          <button onClick={this.newCustomItem}>Create</button>
+        </div>
+      }
+    })
+    const MyModal = ModalWrapper(AddCustom);
+    return <MyModal {...this.props} name='AddCustom' label='AddCustom'/>
+  },
+
   render() {
     var items = this.data.items.map(i => {
+      console.log('ItemList render: ' + Object.keys(i));
       return <li className="list-group-item">
         <div>
           <a href={'/'+this.props.module.name+'/' + i._id + '/main'}
@@ -43,6 +69,7 @@ ItemList = React.createClass({
       </h3>
       <input type='button' onClick={this.newItem}
              value={'Create new ' + this.props.module.name}/>
+      {this.renderAddCustom()}
       <ul className="list">
         {items}
       </ul>

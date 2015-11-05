@@ -1,6 +1,6 @@
 
 celestial.updateItem = function (props, field, value) {
-  const dotKey = `${props.dotKey}.${field}`;
+  const dotKey = props.dotKey ? `${props.dotKey}.${field}` : field;
   console.log(`updateItem: ${dotKey},${value},${props._id}`);
   let obj = {};
   obj[dotKey] = value;

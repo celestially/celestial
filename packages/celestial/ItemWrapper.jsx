@@ -72,12 +72,3 @@ celestial.ItemWrapper = function (Component, section, module, docKey, route) {
   })
 };
 
-celestial.getListComponent = function(module) {
-  return React.createClass({
-    render() {
-      //console.log('getListComponent: ' + JSON.stringify(module.collection));
-      //console.log('Customers: ' + Customers);
-      return <ItemList module={module} itemFactory={module.itemFactory} />
-    }
-  })
-}

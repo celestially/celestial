@@ -11,8 +11,9 @@ celestial.getNavItems = function (section, module, id, theItem) {
       </div>)
 
     } else {
+      idPart = route.listRoute ? '' : id + '/'
       item = (<div className='nav-cell'>
-        <a href={'/' + module.name + '/' + id + '/' + route.name}>
+        <a href={'/' + module.name + '/' + idPart + route.name}>
           {label}</a>
       </div>)
     }
@@ -24,7 +25,7 @@ celestial.getNavItems = function (section, module, id, theItem) {
     <div className='row'>
       {navs}
         <div className='nav-cell'>
-        <SimpleModal name='Structure' label='Structure'
+        <SimpleModal name='Structure' label='JSON'
       value={JSON.stringify(theItem, null, 4)}/>
       </div>
     </div>

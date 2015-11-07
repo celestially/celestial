@@ -65,6 +65,7 @@ ItemList = React.createClass({
     })
 
     return <div>
+      {this.props.renderNav && celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
       <h3>{this.data.items.length} {this.props.module.name}s found
       </h3>
       <input type='button' onClick={this.newItem}

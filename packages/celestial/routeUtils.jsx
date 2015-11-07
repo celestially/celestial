@@ -1,8 +1,23 @@
 celestial.initApp = function(module) {
+
+  //let routes2 = []
+  if (module.listRoute) {
+    var r = {}
+    r.path = '/' + module.listRoute
+    r.name = module.listRoute
+    r.content = celestial.getListComponent(module)
+    r.label = "List Tasks"
+    r.listRoute = true
+    //routes2.push(r)
+  }
+  //routes2.push(module.routes)
+  module.routes.unshift(r)
+  console.log('module.routes: ' + JSON.stringify(module.routes));
+  //routes.push(celestial.createRoutes(module))
+
   Reaktor.init(
     <Router>
       {celestial.createRoutes(module)}
-      {celestial.createListRoute(module)}
     </Router>);
 }
 
@@ -13,12 +28,27 @@ celestial.createListRoute = function(module) {
                                     content={celestial.getListComponent(module)} />
 }
 
+celestial.getListComponent = function(module) {
+  return React.createClass({
+    render() {
+      //console.log('getListComponent: ' + JSON.stringify(module.collection));
+      //console.log('Customers: ' + Customers);
+      return <ItemList module={module} itemFactory={module.itemFactory} renderNav='true'/>
+    }
+  })
+}
+
 celestial.createRoutes = function(module) {
-  return module.routes.map(route => {
+  return module.routes.map(r => {
+    const c = r.listRoute
+      ? r.content
+      : celestial.ItemWrapper(r.content, r.name, module, r.docKey, r)
+    console.log('add route: ' + JSON.stringify(r));
     //console.log('celestial route: ' + JSON.stringify(route));
-    return <Route path={'/' +module.name + route.path}
+    return <Route path={'/' +module.name + r.path}
                   layout={module.layout}
-                  content={celestial.ItemWrapper(route.content, route.name, module, route.docKey, route)}
+                  content={c}
     />
   })
 }
+

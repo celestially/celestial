@@ -31,6 +31,9 @@ Package.onUse(function(api) {
     'routeUtils.jsx',
     'ModalWrapper.jsx',
     'AutoForm.jsx',
+    'inputTypes/TextInput.jsx',
+    'inputTypes/CheckboxInput.jsx',
+    'ui/SimpleModal.jsx',
     ]);
 
   api.export('celestial');
@@ -38,6 +41,9 @@ Package.onUse(function(api) {
   api.export('KeyedItemWrapper');
   api.export('ModalWrapper');
   api.export('AutoForm');
+  api.export('TextInput');
+  api.export('CheckboxInput');
+  api.export('SimpleModal');
 });
 
 //Package.onTest(function(api) {

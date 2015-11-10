@@ -36,6 +36,7 @@ Package.onUse(function(api) {
     'AutoForm.jsx',
     'inputTypes/TextInput.jsx',
     'inputTypes/CheckboxInput.jsx',
+    'ui/ItemInput.jsx',
     'ui/SimpleModal.jsx',
     'schemaEditor/CollectionEditor.jsx',
     'schemaEditor/FieldEditor.jsx',
@@ -50,6 +51,7 @@ Package.onUse(function(api) {
   api.export('AutoForm');
   api.export('TextInput');
   api.export('CheckboxInput');
+  api.export('ItemInput');
   api.export('SimpleModal');
 });
 

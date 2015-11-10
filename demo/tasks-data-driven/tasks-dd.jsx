@@ -1,4 +1,4 @@
-Tasks = new Mongo.Collection('tasks');
+Tasks = new Mongo.Collection('tasks-dd');
 
 Layout = React.createClass({
   render() {

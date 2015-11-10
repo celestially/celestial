@@ -10,7 +10,14 @@ ItemList = React.createClass({
   newItem() {
     if (this.props.module.itemFactory) {
       this.props.module.itemFactory();
-    } else {
+    } else if (this.props.module.schemas) {
+      Meteor.call('newItemFromSchema', this.props.module.name, function (error) {
+        if (error) {
+          throw(error.reason);
+        }
+      })
+    }
+    else {
       this.props.module.collection.insert({name: "New Item"});
     }
   },
@@ -38,6 +45,7 @@ ItemList = React.createClass({
           New Doc:
           <textarea
                  onChange={this.edit}
+                 defaultValue='{"name": "Untitled"}'
           />
           <button onClick={this.newCustomItem}>Create</button>
         </div>

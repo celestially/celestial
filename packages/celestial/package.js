@@ -24,7 +24,7 @@ Package.onUse(function(api) {
     ]);
 
   api.addFiles([
-    'init.js',
+    'init.jsx',
     'nav.jsx',
     'utils.jsx',
     'ItemWrapper.jsx',

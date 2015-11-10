@@ -19,6 +19,8 @@ celestial.initApp = function(module) {
     <Router>
       {celestial.createRoutes(module)}
     </Router>);
+
+  celestial.modules[module.name] = module
 }
 
 

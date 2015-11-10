@@ -1,4 +1,4 @@
-Tasks = new Mongo.Collection('tasks-dd');
+const Tasks = new Mongo.Collection('tasks-dd');
 
 Layout = React.createClass({
   render() {
@@ -6,18 +6,11 @@ Layout = React.createClass({
   }
 });
 
-function newTask() {
-  Meteor.call('newAudit', function(error) {
-    if (error){
-      throwError(error.reason);
-    }
-  });
-}
-
 const tasksApp = {
-  name: 'task',
+  name: 'task-dd',
   collection: Tasks,
-  itemFactory: newTask,
+  //itemFactory: newTask,
+  schemas: ['task_schema'],
   layout: Layout,
   routes: [
     {

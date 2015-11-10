@@ -34,11 +34,11 @@ CollectionEditor = React.createClass({
       { !fields ? <div>No fields</div>
         : <table>
           <tbody>
-          <th>
+          <tr>
             {this.props.item.fields && this.props.item.fields.value.map( field => {
-              return <td>Field: {field.name}</td>}
+              return <td>{field.name}</td>}
               )}
-          </th>
+          </tr>
           {this.props.item.items && this.props.item.items.map( (item, i) => {
             return <tr key={i}>
               {fields.map( (field) => {

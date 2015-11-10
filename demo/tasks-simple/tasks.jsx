@@ -1,8 +1,9 @@
-Tasks = new Mongo.Collection('tasks');
+const Tasks = new Mongo.Collection('tasks');
 
 TaskInput = React.createClass({
   render() {
     return <div>
+      <h2>Edit Task</h2>
       <div>
         Title: <TextInput {...this.props} field="name"/>
       </div>

@@ -28,7 +28,7 @@ FieldEditor = React.createClass({
   },
 
   render() {
-    return this.props.editMode ?
+    return !this.props.schemaLocked ?
       <input type='text'
              onKeyDown={this.save}
              onChange={this.edit}

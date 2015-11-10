@@ -28,7 +28,7 @@ FieldEditor = React.createClass({
   },
 
   render() {
-    return this.state.editing ?
+    return this.props.editMode ?
       <input type='text'
              onKeyDown={this.save}
              onChange={this.edit}
@@ -36,9 +36,8 @@ FieldEditor = React.createClass({
              ref="fieldName"
              defaultValue={this.props.item.name}/>
       :
-      <span onClick={this.startEdit} >
-            {this.props.item.name}
-          </span>}
+      <span>{this.props.item.name}</span>
+  }
 });
 
 FieldEditorWrapper = function (Component) {

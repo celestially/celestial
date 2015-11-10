@@ -14,6 +14,9 @@ Package.onUse(function(api) {
 
   api.use([
     'meteor-platform',
+    'kadira:flow-router',
+    'kadira:react-layout',
+    'kadira:reaktor'
     ]);
 
   api.imply([
@@ -34,6 +37,10 @@ Package.onUse(function(api) {
     'inputTypes/TextInput.jsx',
     'inputTypes/CheckboxInput.jsx',
     'ui/SimpleModal.jsx',
+    'schemaEditor/CollectionEditor.jsx',
+    'schemaEditor/FieldEditor.jsx',
+    'schemaEditor/FormEditor.jsx',
+    'schemaEditor/main.jsx'
     ]);
 
   api.export('celestial');

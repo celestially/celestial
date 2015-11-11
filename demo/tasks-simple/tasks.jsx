@@ -1,5 +1,3 @@
-const Tasks = new Mongo.Collection('tasks');
-
 const TaskInput = React.createClass({
   render() {
     return <div>
@@ -26,7 +24,7 @@ const tasksApp = {
   name: 'task',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: Tasks,
+  collection: new Mongo.Collection('tasks'),
   layout: CommonLayout,
   routes: [
     {

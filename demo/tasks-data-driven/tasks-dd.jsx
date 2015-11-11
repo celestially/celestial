@@ -1,11 +1,9 @@
-const Tasks = new Mongo.Collection('tasks-dd');
-
 const tasksApp = {
   name: 'task-dd',
   label: 'Data Driven Demo',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: Tasks,
+  collection: new Mongo.Collection('tasks-dd'),
   schemas: ['task', 'subtaskChecklist'],
   layout: CommonLayout,
   showNav: true,

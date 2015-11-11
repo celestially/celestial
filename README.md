@@ -1,19 +1,23 @@
 # Celestial
 Celestial is a simple yet powerful framework for creating data-driven apps with React and Meteor. 
 
+##Demo
+
+You can try the demo app at [celestial.meteor.com](http://celestial.meteor.com/), or you can run it by cloning this repo and running `meteor`
+
 ##Principles
 A module in Celestial allows you to define multiple routes. Each module has a primary collection.  This lets you organize your routes logically according to function.
 
+You can also create data-driven apps with automatic forms by defining schemas (see example below).
+
 ##Data-driven example
 ```
-const Tasks = new Mongo.Collection('tasks-dd');
-
 const tasksApp = {
   name: 'task-dd',
   label: 'Data Driven Demo',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: Tasks,
+  collection: new Mongo.Collection('tasks-dd'),
   schemas: ['task', 'subtaskChecklist'],
   layout: CommonLayout,
   showNav: true,
@@ -38,7 +42,7 @@ const tasksApp = {
   name: 'task',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: Tasks,
+  collection: new Mongo.Collection('tasks'),
   layout: CommonLayout,
   routes: [
     {
@@ -54,7 +58,7 @@ const tasksApp = {
 Celestial.initModule(tasksApp);
 ```
 
-For this example TaskInput is a React component:
+In this example TaskInput is a React component:
 
 ```
 const TaskInput = React.createClass({

@@ -46,7 +46,7 @@ FieldEditorWrapper = function (Component) {
     render() {
       //console.log('editFieldName render: ');
       return <tr>
-        <td style={{verticalAlign: 'top', background: 'orange'}}>
+        <td style={{verticalAlign: 'top', background: 'lightgray'}}>
           <FieldEditor {...this.props} />
         </td>
         <td>

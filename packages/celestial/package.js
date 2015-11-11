@@ -38,6 +38,7 @@ Package.onUse(function(api) {
     'inputTypes/CheckboxInput.jsx',
     'ui/ItemInput.jsx',
     'ui/SimpleModal.jsx',
+    'schemaEditor/JSONViewWrapper.jsx',
     'schemaEditor/CollectionEditor.jsx',
     'schemaEditor/FieldEditor.jsx',
     'schemaEditor/FormEditor.jsx',

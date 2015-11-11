@@ -1,9 +1,14 @@
 ItemList = React.createClass({
-  mixins: [ReactMeteorData],
+  mixins: [ReactMeteorData, React.addons.LinkedStateMixin],
+
+  getInitialState: function () {
+    return {
+    };
+  },
 
   getMeteorData() {
     return {
-      items: this.props.module.collection.find().fetch()
+      items: this.props.module.collection.find({}, {sort: {createdAt: -1}}).fetch()
     };
   },
 
@@ -19,6 +24,23 @@ ItemList = React.createClass({
     }
     else {
       this.props.module.collection.insert({name: "New Item"});
+    }
+  },
+
+  addItem(e) {
+    if (this.props.module.schemas) {
+      Meteor.call('newItemFromSchema', this.props.module.name, this.state.newItemName, function (error) {
+        if (error) {
+          throw(error.reason);
+        }
+      })
+    }
+    else {
+      this.props.module.collection.insert(
+        {
+          name: this.state.newItemName,
+          createdAt: new Date(),
+        });
     }
   },
 
@@ -67,7 +89,17 @@ ItemList = React.createClass({
   },
 
   render() {
-    var items = this.data.items.map(i => {
+    //render add box
+    const addItem = <li className="list-group-item">
+      <div>
+        <input type='text'
+               valueLink={this.linkState('newItemName')}
+        />
+        </div>
+      <button onClick={this.addItem}>Add</button>
+      </li>
+    //render items
+    const items = this.data.items.map(i => {
       console.log('ItemList render: ' + Object.keys(i));
       return <li className="list-group-item">
         <div>
@@ -87,15 +119,16 @@ ItemList = React.createClass({
       {this.props.renderNav && celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
       <h3>{this.data.items.length} {this.props.module.pluralName} found
       </h3>
-      <input type='button' onClick={this.newItem}
-             value={'Create new ' + this.props.module.singularName}/>
-      {this.renderAddCustom()}
       <ul className="list">
+        {addItem}
         {items}
       </ul>
-      {this.props.children}
     </div>
   }
 });
+
+//<input type='button' onClick={this.newItem}
+//       value={'Create new ' + this.props.module.singularName}/>
+//{this.renderAddCustom()}
 
 

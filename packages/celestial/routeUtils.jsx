@@ -8,7 +8,7 @@ celestial.initModule = function(module) {
         route = {
           path: '/:id/' + name,
           name: name,
-          content: ItemInput,
+          content: JSONViewWrapper(ItemInput),
           label: schema,
           docKey: schema
         }

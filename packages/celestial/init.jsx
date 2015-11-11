@@ -17,10 +17,11 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  newItemFromSchema: function (moduleName) {
+  newItemFromSchema: function (moduleName, itemName) {
     console.log('newItemFromSchema: ' );
     obj = {};
-    celestial.modules[moduleName].schemas.map( schema => {
+    const schemasArr = celestial.modules[moduleName].schemas
+    schemasArr.map( schema => {
       const prototype = celestial.Schemas.findOne({name: schema})
       if (prototype) {
         obj[schema] = prototype.schema
@@ -28,7 +29,9 @@ Meteor.methods({
         console.log('schema not found: ' + schema);
       }
     });
-    obj['name'] = 'New Item';
+    obj[schemasArr[0]].value[0].value = itemName
+    obj.createdAt = new Date()
+    //obj['name'] = 'New Item';
     var _id = celestial.modules[moduleName].collection.insert(obj)
     return _id;
   }

@@ -51,7 +51,7 @@ CollectionEditor = React.createClass({
           </tbody>
         </table>}
         <button onClick={this.addItem}>Add row</button>
-        <td>{this.renderEditFields()}</td>
+      {!this.props.schemaLocked && <td>{this.renderEditFields()}</td>}
     </div>
   },
 

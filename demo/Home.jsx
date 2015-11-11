@@ -15,6 +15,8 @@ const Home = React.createClass({
           </li>
         </ul>
       </h2>
+      Note: built-in schemas are locked to prevent them being edited in public demo. Remove "locked": true
+      in bootrap.jsx if you want to edit them.
     </div>
   }
 });

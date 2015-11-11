@@ -1,7 +1,6 @@
-# Celestial
 Celestial is a simple yet powerful framework for creating declarative, data-driven apps with React and Meteor.
 
-It is ideal for business apps, for example a CRM, Issue Tracker, etc.  However it is under development and still incomplete.
+It is ideal for business apps, for example a CRM, Issue Tracker, etc.  However it is under development and still incomplete.  Feedback is welcome.
 
 ##Demo
 
@@ -85,3 +84,9 @@ const TaskInput = React.createClass({
   }
 });
 ```
+
+## Initial Features
+* Item List - automatically generate a list UI and route
+* Input Types - initially there is text and boolean, and collections
+* Schemas - ability to edit schemas, automatically generate input forms
+* Router - automatically generates routes, uses FlowRouter and Reaktor under the hood

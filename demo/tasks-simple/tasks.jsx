@@ -24,7 +24,7 @@ const tasksApp = {
   name: 'task',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: new Mongo.Collection('tasks'),
+  collection: Tasks,
   layout: CommonLayout,
   routes: [
     {

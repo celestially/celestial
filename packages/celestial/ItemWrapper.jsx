@@ -63,6 +63,7 @@ Celestial.ItemWrapper = function (Component, section, module, docKey, route) {
 
         <Component item={item}
                    collection={collection}
+                   schemaLocked={this.data.item.locked}
                    _id={this.data.item._id}
                    module={module}
                    updateItem={this.updateItem}

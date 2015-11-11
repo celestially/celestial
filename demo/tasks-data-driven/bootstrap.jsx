@@ -1,48 +1,46 @@
-Meteor.startup(function () {
+Meteor.startup(function() {
   if (Celestial.Schemas.find().count() === 0) {
     Celestial.Schemas.insert({
-      "_id": "cFPnJ5BkCnMa5mnP9",
+      "_id": "vnrQcaMM8daGJz9tc",
       "name": "task",
-      "schema": {
-        "value": [
-          {
-            "type": "string",
-            "name": "Title"
-          },
-          {
-            "type": "string",
-            "name": "Due Date"
-          },
-          {
-            "type": "boolean",
-            "name": "Completed"
-          }
-        ]
-      }
+      "createdAt": "2015-11-11T21:31:33.140Z",
+      "locked": true,
+      "schema": [
+        {
+          "type": "string",
+          "name": "Title"
+        },
+        {
+          "type": "string",
+          "name": "Due Date"
+        },
+        {
+          "type": "boolean",
+          "name": "Completed"
+        }
+      ]
     });
     Celestial.Schemas.insert({
-      "_id": "JSbCu43wDnEdiyX7h",
+      "_id": "7y3BgjSPnqdxeRWk6",
       "name": "subtaskChecklist",
-      "schema": {
-        "value": [
-          {
-            "type": "collection",
-            "name": "Checklist",
-            "fields": {
-              "value": [
-                {
-                  "type": "string",
-                  "name": "Subtask"
-                },
-                {
-                  "type": "boolean",
-                  "name": "Completed"
-                }
-              ]
+      "createdAt": "2015-11-11T21:33:44.963Z",
+      "locked": true,
+      "schema": [
+        {
+          "type": "collection",
+          "name": "Checklist",
+          "fields": [
+            {
+              "type": "string",
+              "name": "Subtask"
+            },
+            {
+              "type": "boolean",
+              "name": "Completed"
             }
-          }
-        ]
-      }
+          ]
+        }
+      ]
     });
   }
 })

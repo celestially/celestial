@@ -18,7 +18,7 @@ ItemList = React.createClass({
     } else if (this.props.module.schemas) {
       Meteor.call('newItemFromSchema', this.props.module.name, function (error) {
         if (error) {
-          throw(error.reason);
+          throw(error);
         }
       })
     }
@@ -85,7 +85,7 @@ ItemList = React.createClass({
     //console.log('ListItemComp: ' + ListItemComp);
     if (this.props.module.schemas) {
       const s = this.props.module.schemas[0]
-      const title = item[s].value[0].value
+      const title = item[s][0].value
       return title ? title : "No title"
     } else {
         return item.name

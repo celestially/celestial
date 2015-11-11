@@ -3,7 +3,7 @@ const tasksApp = {
   label: 'Data Driven Demo',
   singularName: 'task',
   pluralName: 'tasks',
-  collection: new Mongo.Collection('tasks-dd'),
+  collection: TasksDD,
   schemas: ['task', 'subtaskChecklist'],
   layout: CommonLayout,
   showNav: true,

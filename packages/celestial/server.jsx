@@ -26,7 +26,9 @@ Meteor.methods({
         console.log('schema not found: ' + schema);
       }
     });
-    obj[schemasArr[0]].value[0].value = itemName
+    console.log('newItemFromSchema obj: ' + JSON.stringify(obj));
+    console.log('newItemFromSchema schemasArr: ' + JSON.stringify(schemasArr));
+    obj[schemasArr[0]][0].value = itemName
     obj.createdAt = new Date()
     //obj['name'] = 'New Item';
     var _id = Celestial.modules[moduleName].collection.insert(obj)

@@ -95,12 +95,7 @@ FormEditor = React.createClass({
       { !this.props.schemaLocked && <div>
         <button onClick={this.addText}>Add Text</button>
         <button onClick={this.addCheckbox}>Add Checkbox</button>
-        <button onClick={this.addForm}>Add Form</button>
         <button onClick={this.addCollection}>Add Collection</button>
-        <button onClick={this.clear}>Clear</button>
-
-        <SimpleModal name='JSON' label='JSON View'
-                     value={JSON.stringify(this.props.item, null, 4)}/>
       </div>}
     </div>
   }

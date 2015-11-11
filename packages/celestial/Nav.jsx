@@ -25,7 +25,7 @@ celestial.getNavItems = function (section, module, id, theItem) {
     <div className='row'>
       {navs}
         <div className='nav-cell'>
-        <SimpleModal name='Structure' label='JSON'
+        <SimpleModal name='Structure' label='View JSON'
       value={JSON.stringify(theItem, null, 4)}/>
       </div>
     </div>

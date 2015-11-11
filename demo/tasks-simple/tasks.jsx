@@ -1,6 +1,6 @@
 const Tasks = new Mongo.Collection('tasks');
 
-TaskInput = React.createClass({
+const TaskInput = React.createClass({
   render() {
     return <div>
       <h2>Edit Task</h2>
@@ -11,29 +11,32 @@ TaskInput = React.createClass({
         Due Date: <TextInput {...this.props} field="dueDate"/>
       </div>
       <div>
-        <CheckboxInput {...this.props} field="private"/> Private
+        <CheckboxInput {...this.props} field="completed"/> Completed
+      </div>
+      <div>
+        <h3>
+          <a href='/task/list'>Back to Task List</a>
+        </h3>
       </div>
     </div>
   }
 });
 
-Layout = React.createClass({
-  render() {
-    return <div>{this.props.content}</div>
-  }
-});
-
-const routes = [
-  ['path', 'name', 'content', 'label'],
-  ['/:id/main', 'main', TaskInput, "Edit Task"],
-];
-
 const tasksApp = {
   name: 'task',
+  singularName: 'task',
+  pluralName: 'tasks',
   collection: Tasks,
-  layout: Layout,
-  routes: convertToArrayOfObjects(routes),
-  listRoute: 'list'
+  layout: CommonLayout,
+  routes: [
+    {
+      path: '/:id/main',
+      name: 'main',
+      content: TaskInput,
+    }
+  ],
+  listRoute: 'list',
+  showNav: false
 };
 
-celestial.initApp(tasksApp);
+celestial.initModule(tasksApp);

@@ -1,4 +1,4 @@
-celestial.initApp = function(module) {
+celestial.initModule = function(module) {
 
   //let routes2 = []
   if (module.listRoute) {
@@ -35,7 +35,7 @@ celestial.getListComponent = function(module) {
     render() {
       //console.log('getListComponent: ' + JSON.stringify(module.collection));
       //console.log('Customers: ' + Customers);
-      return <ItemList module={module} itemFactory={module.itemFactory} renderNav='true'/>
+      return <ItemList module={module} itemFactory={module.itemFactory} renderNav={false} />
     }
   })
 }

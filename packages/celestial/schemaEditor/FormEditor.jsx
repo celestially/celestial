@@ -67,8 +67,8 @@ FormEditor = React.createClass({
           return field.type == 'string' ? this.renderField(field, i, TextInput) :
             field.type == 'boolean' ? this.renderField(field, i, CheckboxInput) :
               field.type == 'array' ? this.renderForm(field, i, false) :
-              field.type == 'collection' ? this.renderCollection(field, i, false) :
-                <span>Unknown type</span>
+                field.type == 'collection' ? this.renderCollection(field, i, false) :
+                  <span>Unknown type</span>
         }
       }
     )
@@ -90,17 +90,18 @@ FormEditor = React.createClass({
 
   render() {
     console.log('FormEditor render: ' + JSON.stringify(this.props.item));
-    return <div className='green'>
-      <h3>Form Editor</h3>
+    return <div>
       {this.renderValue()}
-      <button onClick={this.addText}>Add Text</button>
-      <button onClick={this.addCheckbox}>Add Checkbox</button>
-      <button onClick={this.addForm}>Add Form</button>
-      <button onClick={this.addCollection}>Add Collection</button>
-      <button onClick={this.clear}>Clear</button>
+      { !this.props.schemaLocked && <div>
+        <button onClick={this.addText}>Add Text</button>
+        <button onClick={this.addCheckbox}>Add Checkbox</button>
+        <button onClick={this.addForm}>Add Form</button>
+        <button onClick={this.addCollection}>Add Collection</button>
+        <button onClick={this.clear}>Clear</button>
 
-      <SimpleModal name='JSON' label='JSON View'
-                   value={JSON.stringify(this.props.item, null, 4)}/>
+        <SimpleModal name='JSON' label='JSON View'
+                     value={JSON.stringify(this.props.item, null, 4)}/>
+      </div>}
     </div>
   }
 });

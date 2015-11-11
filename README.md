@@ -19,7 +19,7 @@ const tasksApp = {
   listRoute: 'list'
 };
 
-celestial.initApp(tasksApp);
+celestial.initModule(tasksApp);
 ```
 
 TaskInput is a React component:

@@ -15,20 +15,13 @@ var Layout = React.createClass({
 
 const devModule = {
   name: 'schema',
+  singularName: 'schema',
+  pluralName: 'schema',
   collection: celestial.Schemas,
   itemFactory: newSchema,
   layout: Layout,
+  showNav: true,
   routes: [
-    //{
-    //  path: '/:id/moduleSchema',
-    //  name: 'moduleSchema',
-    //  content: celestial.ConfigItemWrapper(JSONViewWrapper(FormEditor),'module')
-    //},
-    //{
-    //  path: '/:id/TopLevel',
-    //  name: 'TopLevel',
-    //  content: TopLevelKeyEditor,
-    //},
     {
       path: '/:id/main',
       name: 'schema',

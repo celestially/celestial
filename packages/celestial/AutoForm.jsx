@@ -33,7 +33,7 @@ AutoForm = React.createClass({
       //let obj = {};
       //obj[dotKey] = value;
       //this.props.collection.update(this.props._id, {"$set": obj})
-      celestial.updateItem(this.props, field, value);
+      Celestial.updateItem(this.props, field, value);
     })
   },
 

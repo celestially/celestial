@@ -1,4 +1,4 @@
-celestial.ConfigItemWrapper = function (Component, configName) {
+Celestial.ConfigItemWrapper = function (Component, configName) {
   return React.createClass({
     mixins: [ReactMeteorData],
 

@@ -116,7 +116,7 @@ ItemList = React.createClass({
     })
 
     return <div>
-      {this.props.renderNav && celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
+      {this.props.renderNav && Celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
       <h3>{this.data.items.length} {this.props.module.pluralName} found
       </h3>
       <ul className="list">

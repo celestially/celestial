@@ -12,4 +12,4 @@ const tasksApp = {
   listRoute: 'list',
 };
 
-celestial.initModule(tasksApp);
+Celestial.initModule(tasksApp);

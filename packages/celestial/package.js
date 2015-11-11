@@ -45,7 +45,7 @@ Package.onUse(function(api) {
     'schemaEditor/main.jsx'
     ]);
 
-  api.export('celestial');
+  api.export('Celestial');
   api.export('ItemList');
   api.export('KeyedItemWrapper');
   api.export('ModalWrapper');

@@ -1,4 +1,4 @@
-celestial.ItemWrapper = function (Component, section, module, docKey, route) {
+Celestial.ItemWrapper = function (Component, section, module, docKey, route) {
 
   const collection = module.context? module.context : module.collection;
 
@@ -59,7 +59,7 @@ celestial.ItemWrapper = function (Component, section, module, docKey, route) {
       //console.log('ItemWrapper item: ' + Object.keys(item));
       //console.log('ItemWrapper dotKey: ' + dotKey);
       return <div>
-        {module.showNav && !route.hideNav && celestial.getNavItems(section, module, this.data.item._id, this.data.item)}
+        {module.showNav && !route.hideNav && Celestial.getNavItems(section, module, this.data.item._id, this.data.item)}
 
         <Component item={item}
                    collection={collection}

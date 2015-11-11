@@ -1,4 +1,4 @@
-celestial.getNavItems = function (section, module, id, theItem) {
+Celestial.getNavItems = function (section, module, id, theItem) {
 
   //const id = item._id;
   const navs = module.routes.map(route => {

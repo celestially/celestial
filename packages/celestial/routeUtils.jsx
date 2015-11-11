@@ -1,4 +1,4 @@
-celestial.initModule = function(module) {
+Celestial.initModule = function(module) {
 
   if (!module.routes) {
     module.routes = []
@@ -21,7 +21,7 @@ celestial.initModule = function(module) {
     var r = {}
     r.path = '/' + module.listRoute
     r.name = module.listRoute
-    r.content = celestial.getListComponent(module)
+    r.content = Celestial.getListComponent(module)
     r.label = "List " + module.pluralName
     r.listRoute = true
     //routes2.push(r)
@@ -30,24 +30,24 @@ celestial.initModule = function(module) {
   //routes2.push(module.routes)
   module.routes.unshift(r)
   console.log('module.routes: ' + JSON.stringify(module.routes));
-  //routes.push(celestial.createRoutes(module))
+  //routes.push(Celestial.createRoutes(module))
 
   Reaktor.init(
     <Router>
-      {celestial.createRoutes(module)}
+      {Celestial.createRoutes(module)}
     </Router>);
 
-  celestial.modules[module.name] = module
+  Celestial.modules[module.name] = module
 }
 
 
-celestial.createListRoute = function(module) {
+Celestial.createListRoute = function(module) {
   return module.listRoute && <Route path={'/' + module.name + module.listRoute}
                                     layout={module.layout}
-                                    content={celestial.getListComponent(module)} />
+                                    content={Celestial.getListComponent(module)} />
 }
 
-celestial.getListComponent = function(module) {
+Celestial.getListComponent = function(module) {
   return React.createClass({
     render() {
       //console.log('getListComponent: ' + JSON.stringify(module.collection));
@@ -57,13 +57,13 @@ celestial.getListComponent = function(module) {
   })
 }
 
-celestial.createRoutes = function(module) {
+Celestial.createRoutes = function(module) {
   return module.routes.map(r => {
     const c = r.listRoute
       ? r.content
-      : celestial.ItemWrapper(r.content, r.name, module, r.docKey, r)
+      : Celestial.ItemWrapper(r.content, r.name, module, r.docKey, r)
     console.log('add route: ' + module.name + ', ' + JSON.stringify(r));
-    //console.log('celestial route: ' + JSON.stringify(route));
+    //console.log('Celestial route: ' + JSON.stringify(route));
     return <Route path={'/' +module.name + r.path}
                   layout={module.layout}
                   content={c}

@@ -1,6 +1,6 @@
 CheckboxInput = React.createClass({
   setChecked(e) {
-    celestial.updateItem(this.props, this.props.field ? this.props.field : 'value',
+    Celestial.updateItem(this.props, this.props.field ? this.props.field : 'value',
       e.target.checked);
   },
   render() {

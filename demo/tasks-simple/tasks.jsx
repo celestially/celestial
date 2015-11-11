@@ -39,4 +39,4 @@ const tasksApp = {
   showNav: false
 };
 
-celestial.initModule(tasksApp);
+Celestial.initModule(tasksApp);

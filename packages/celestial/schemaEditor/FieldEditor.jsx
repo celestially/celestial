@@ -13,13 +13,13 @@ FieldEditor = React.createClass({
 
   save: function (e) {
     if (e.keyCode == 13) {
-      celestial.updateItem(this.props, 'name', e.target.value);
+      Celestial.updateItem(this.props, 'name', e.target.value);
       //this.setState({editing: false})
     }
   },
 
   save2: function (e) {
-    celestial.updateItem(this.props, 'name', e.target.value);
+    Celestial.updateItem(this.props, 'name', e.target.value);
   },
 
   edit(e) {

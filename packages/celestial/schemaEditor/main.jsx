@@ -17,7 +17,7 @@ const schemaModule = {
   name: 'schema',
   singularName: 'schema',
   pluralName: 'schemas',
-  collection: celestial.Schemas,
+  collection: Celestial.Schemas,
   itemFactory: newSchema,
   layout: Layout,
   showNav: true,
@@ -36,7 +36,7 @@ const schemaModule = {
 //  name: 'module',
 //  singularName: 'module',
 //  pluralName: 'modules',
-//  collection: celestial.Modules,
+//  collection: Celestial.Modules,
 //  schemas: ['module'],
 //  layout: Layout,
 //  showNav: true,
@@ -53,11 +53,11 @@ const schemaModule = {
 
 Reaktor.init(
   <Router>
-    {celestial.createRoutes(schemaModule)}
+    {Celestial.createRoutes(schemaModule)}
 
     <Route path="/schema/list"
            layout={Layout}
-           content={celestial.getListComponent(schemaModule)} />
+           content={Celestial.getListComponent(schemaModule)} />
 
   </Router>);
 

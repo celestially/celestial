@@ -1,5 +1,5 @@
 
-celestial.updateItem = function (props, field, value) {
+Celestial.updateItem = function (props, field, value) {
   const dotKey = props.dotKey ? `${props.dotKey}.${field}` : field;
   console.log(`updateItem: ${dotKey},${value},${props._id}`);
   let obj = {};
@@ -7,7 +7,7 @@ celestial.updateItem = function (props, field, value) {
   props.collection.update(props._id, {"$set": obj})
 }
 
-celestial.updateItem2 = function (props, field, value, op="$set") {
+Celestial.updateItem2 = function (props, field, value, op="$set") {
   const dotKey = field ? `${props.dotKey}.${field}` : props.dotKey;
   console.log(`updateItem: ${op}, ${dotKey}, ${value}, ${props._id}`);
   let obj = {};
@@ -15,7 +15,7 @@ celestial.updateItem2 = function (props, field, value, op="$set") {
   props.collection.update(props._id, {op: obj})
 }
 
-celestial.util.convertToArrayOfObjects= function(arr) {
+Celestial.util.convertToArrayOfObjects= function(arr) {
   var result = []
   var keyRow = arr[0]
   arr.splice(0,1)
@@ -29,7 +29,7 @@ celestial.util.convertToArrayOfObjects= function(arr) {
   return result;
 }
 
-celestial.util.convertToObjectOfObjects = function(arr) {
+Celestial.util.convertToObjectOfObjects = function(arr) {
   var result = {}
   var keyRow = arr[0]
   keyRow.splice(0,1)
@@ -47,7 +47,7 @@ celestial.util.convertToObjectOfObjects = function(arr) {
   return result;
 }
 
-celestial.util.replaceAll = function(str, find, replace) {
+Celestial.util.replaceAll = function(str, find, replace) {
   //var find = ;
   return str.replace(new RegExp(find, 'g'), replace);
 }

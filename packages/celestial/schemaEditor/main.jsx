@@ -13,14 +13,15 @@ var Layout = React.createClass({
   }
 });
 
-const devModule = {
+const schemaModule = {
   name: 'schema',
   singularName: 'schema',
-  pluralName: 'schema',
+  pluralName: 'schemas',
   collection: celestial.Schemas,
   itemFactory: newSchema,
   layout: Layout,
   showNav: true,
+  listRoute: 'list',
   routes: [
     {
       path: '/:id/main',
@@ -31,13 +32,32 @@ const devModule = {
   ]
 };
 
+//const moduleModule = {
+//  name: 'module',
+//  singularName: 'module',
+//  pluralName: 'modules',
+//  collection: celestial.Modules,
+//  schemas: ['module'],
+//  layout: Layout,
+//  showNav: true,
+//  listRoute: 'list',
+//  routes: [
+//    {
+//      path: '/:id/main',
+//      name: 'schema',
+//      content: FormEditor,
+//      docKey: 'schema'
+//    },
+//  ]
+//};
+
 Reaktor.init(
   <Router>
-
-    {celestial.createRoutes(devModule)}
+    {celestial.createRoutes(schemaModule)}
 
     <Route path="/schema/list"
            layout={Layout}
-           content={celestial.getListComponent(devModule)} />
+           content={celestial.getListComponent(schemaModule)} />
+
   </Router>);
 

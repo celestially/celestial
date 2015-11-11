@@ -55,6 +55,17 @@ ItemList = React.createClass({
     return <MyModal {...this.props} name='AddCustom' label='AddCustom'/>
   },
 
+  renderListItem(item) {
+    //console.log('ListItemComp: ' + ListItemComp);
+    if (this.props.module.schemas) {
+      const s = this.props.module.schemas[0]
+      const title = item[s].value[0].value
+      return title ? title : "No title"
+    } else {
+        return item.name
+    }
+  },
+
   render() {
     var items = this.data.items.map(i => {
       console.log('ItemList render: ' + Object.keys(i));
@@ -63,7 +74,7 @@ ItemList = React.createClass({
           <a href={'/'+this.props.module.name+'/' + i._id + '/main'}
              className="tooltip"
           >
-            {i.name}
+            {this.renderListItem(i)}
           </a>
           <div className="right grayedSmall">{i._id}
             <button value={i._id} onClick={this.deleteItem}>Delete</button>
@@ -74,10 +85,10 @@ ItemList = React.createClass({
 
     return <div>
       {this.props.renderNav && celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
-      <h3>{this.data.items.length} {this.props.module.name}s found
+      <h3>{this.data.items.length} {this.props.module.pluralName} found
       </h3>
       <input type='button' onClick={this.newItem}
-             value={'Create new ' + this.props.module.name}/>
+             value={'Create new ' + this.props.module.singularName}/>
       {this.renderAddCustom()}
       <ul className="list">
         {items}

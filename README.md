@@ -1,5 +1,7 @@
 # Celestial
-Celestial is a simple yet powerful framework for creating data-driven apps with React and Meteor. 
+Celestial is a simple yet powerful framework for creating declarative, data-driven apps with React and Meteor.
+
+It is ideal for business apps, for example a CRM, Issue Tracker, etc.  However it is under development and still incomplete.
 
 ##Demo
 

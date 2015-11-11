@@ -36,11 +36,15 @@ ItemList = React.createClass({
       })
     }
     else {
-      this.props.module.collection.insert(
-        {
-          name: this.state.newItemName,
-          createdAt: new Date(),
-        });
+      let obj = {
+        name: this.state.newItemName,
+        createdAt: new Date(),
+      }
+      if (this.props.module.newItemTemplate) {
+        _.extend(obj, this.props.module.newItemTemplate)
+        console.log('obj extended: ' + obj);
+      }
+      this.props.module.collection.insert(obj);
     }
   },
 

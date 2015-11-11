@@ -45,6 +45,10 @@ Package.onUse(function(api) {
     'schemaEditor/main.jsx'
     ]);
 
+  api.addFiles([
+    'server.jsx',
+  ], 'server');
+
   api.export('Celestial');
   api.export('ItemList');
   api.export('KeyedItemWrapper');

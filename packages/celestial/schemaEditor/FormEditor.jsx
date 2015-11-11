@@ -7,7 +7,7 @@ FormEditor = React.createClass({
   addField(blockType) {
     //!this.props.item.blocks && this.createBlocksKey();
     let obj = {}
-    const dotKey = this.props.dotKey ? `${this.props.dotKey}.value` : 'value'
+    const dotKey = this.props.dotKey ? `${this.props.dotKey}` : ''
     console.log(`addField: ${dotKey},${this.props._id}`);
     obj[dotKey] = {}
     obj[dotKey].type = blockType;
@@ -29,8 +29,8 @@ FormEditor = React.createClass({
     this.addField('collection')
   },
   clear() {
-    let obj = {}
-    const dotKey = `${this.props.dotKey}.value`;
+    let obj = []
+    const dotKey = `${this.props.dotKey}`;
     console.log(`clear: ${dotKey},${this.props._id}`);
     obj[dotKey] = ''
     this.props.collection.update(this.props._id, {"$unset": obj})
@@ -38,14 +38,14 @@ FormEditor = React.createClass({
 
   renderField(field, i, Component) {
     const Comp = FieldEditorWrapper(Component);
-    return <Comp {...this.props} item={field} dotKey={this.props.dotKey + '.value.' + i}/>
+    return <Comp {...this.props} item={field} dotKey={this.props.dotKey + '.' + i}/>
   },
 
   renderForm(field, i, asObject) {
     //console.log('FormEditor renderArrayField: ' + JSON.stringify(field));
     const Comp = FieldEditorWrapper(FormEditor);
     return <Comp {...this.props} item={field}
-                                 dotKey={this.props.dotKey + '.value.' + i}
+                                 dotKey={this.props.dotKey + '.' + i}
                                  asObject={asObject}
     />
   },
@@ -54,14 +54,14 @@ FormEditor = React.createClass({
     //console.log('FormEditor renderArrayField: ' + JSON.stringify(field));
     const Comp = FieldEditorWrapper(CollectionEditor);
     return <Comp {...this.props} item={field}
-                                 dotKey={this.props.dotKey + '.value.' + i}
+                                 dotKey={this.props.dotKey + '.' + i}
     />
   },
 
   renderKeys(keys) {
     console.log('FormEditor renderArray: ' + JSON.stringify(keys));
     return keys.map((name, i) => {
-        const field = this.props.item.value[i];
+        const field = this.props.item[i];
         console.log('FormEditor field: ' + JSON.stringify(field));
         {
           return field.type == 'string' ? this.renderField(field, i, TextInput) :
@@ -76,8 +76,8 @@ FormEditor = React.createClass({
 
   renderValue() {
     let keys = this.props.item &&
-      this.props.item.value &&
-      Object.keys(this.props.item.value)
+      //this.props.item &&
+      Object.keys(this.props.item)
     if (!keys) {
       return <div>No keys found</div>
     }

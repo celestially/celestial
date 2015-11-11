@@ -18,38 +18,22 @@ const schemaModule = {
   singularName: 'schema',
   pluralName: 'schemas',
   collection: Celestial.Schemas,
-  itemFactory: newSchema,
+  //itemFactory: newSchema,
   layout: Layout,
   showNav: true,
   listRoute: 'list',
+  newItemTemplate: {
+    schema: []
+  },
   routes: [
     {
       path: '/:id/main',
       name: 'schema',
-      content: FormEditor,
+      content: JSONViewWrapper(FormEditor),
       docKey: 'schema'
     },
   ]
 };
-
-//const moduleModule = {
-//  name: 'module',
-//  singularName: 'module',
-//  pluralName: 'modules',
-//  collection: Celestial.Modules,
-//  schemas: ['module'],
-//  layout: Layout,
-//  showNav: true,
-//  listRoute: 'list',
-//  routes: [
-//    {
-//      path: '/:id/main',
-//      name: 'schema',
-//      content: FormEditor,
-//      docKey: 'schema'
-//    },
-//  ]
-//};
 
 Reaktor.init(
   <Router>

@@ -1,4 +1,4 @@
-ModalWrapper = function (Component) {
+ModalWrapper = Celestial.ModalWrapper = function (Component) {
   return React.createClass({
 
     render() {

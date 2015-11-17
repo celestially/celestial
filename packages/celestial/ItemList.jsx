@@ -123,6 +123,7 @@ ItemList = React.createClass({
       {this.props.renderNav && Celestial.getNavItems(this.props.module.listRoute, this.props.module, null, null)}
       <h3>{this.data.items.length} {this.props.module.pluralName} found
       </h3>
+      {this.renderAddCustom()}
       <ul className="list">
         {addItem}
         {items}

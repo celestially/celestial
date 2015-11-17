@@ -1,4 +1,4 @@
-AutoForm = React.createClass({
+AutoForm = Celestial.AutoForm = React.createClass({
 
   getInitialState: function () {
     return {

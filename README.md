@@ -1,15 +1,17 @@
-Celestial is a simple yet powerful framework for creating declarative, data-driven apps with React and Meteor.
+Celestial is an experimental, high-level, simple-yet-poweful framework for creating declarative, data-driven apps with React and Meteor.
 
-It is ideal for business apps, for example a CRM, Issue Tracker, etc.  However it is under development and still incomplete.  Feedback is welcome.
+It is meant to be ideal for business apps, for example a CRM, CMS, issue tracking system, etc.  (Note, however it is under development and incomplete).
+
+##Principles
+One of the core features of Celestial is the ability to auto-generate forms, and it has a built-in schema editor that let's you edit forms. Currently there are only a few input types, see[checkbox](https://github.com/celestially/celestial/blob/master/packages/celestial/inputTypes/CheckboxInput.jsx) and [collection](https://github.com/celestially/celestial/blob/master/packages/celestial/schemaEditor/CollectionEditor.jsx) for example.
+
+A module in Celestial allows you to define multiple routes. Each module has a primary collection.  This lets you organize your routes logically according to function.
+
+You can create data-driven app be defining one or more schemas and referencing them in the module definition (see example below).  The advantage of this is that you can have a site admin or a domain-expert create or customize a schema, instead of a developer.
 
 ##Demo
 
 You can try the demo app at [celestial.meteor.com](http://celestial.meteor.com/), or you can run it by cloning this repo and running `meteor`
-
-##Principles
-A module in Celestial allows you to define multiple routes. Each module has a primary collection.  This lets you organize your routes logically according to function.
-
-You can also create data-driven apps with automatic forms by defining schemas (see example below).
 
 ##Data-driven example
 ```
@@ -32,9 +34,9 @@ This automatically configures a route for each schema, plus a list route.
 
 The schemas can be configured/defiend by pointing your browser to /schema/list
 
-Once you have configured the schemas, you can view/add tasks at /task-dd/list
+When you run this example, you can view/add tasks at /task-dd/list.  Note the default schemas for the example above are automatically created in bootstrap.jsx, and they are "locked" to prevent people playing with demo site from messing them up.
 
-##Basic example
+##"Programmatic" example
 
 You can also define a module completely in code (not data-driven):
 
@@ -85,8 +87,10 @@ const TaskInput = React.createClass({
 });
 ```
 
-## Initial Features
+Note that in this example above you need to pass {...this.props} to the input components.  This is due to the way React works, however soon we will switch to using React "Context" to improve this.
+
+## Features
 * Item List - automatically generate a list UI and route
 * Input Types - initially there is text and boolean, and collections
 * Schemas - ability to edit schemas, automatically generate input forms
-* Router - automatically generates routes, uses FlowRouter and Reaktor under the hood
+* Router - automatically generates routes, it uses FlowRouter and Reaktor under the hood

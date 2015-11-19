@@ -3,7 +3,7 @@ Celestial is an experimental, high-level, simple-yet-poweful framework for creat
 It is meant to be ideal for business apps, for example a CRM, CMS, issue tracking system, etc.  (Note, however it is under development and incomplete).
 
 ##Principles
-One of the core features of Celestial is the ability to auto-generate forms, and it has a built-in schema editor that let's you edit forms. Currently there are only a few input types, see[checkbox](https://github.com/celestially/celestial/blob/master/packages/celestial/inputTypes/CheckboxInput.jsx) and [collection](https://github.com/celestially/celestial/blob/master/packages/celestial/schemaEditor/CollectionEditor.jsx) for example.
+One of the core features of Celestial is the ability to auto-generate forms, and it has a built-in schema editor that let's you edit forms. Currently there are only a few input types, see [checkbox](https://github.com/celestially/celestial/blob/master/packages/celestial/inputTypes/CheckboxInput.jsx) and [collection](https://github.com/celestially/celestial/blob/master/packages/celestial/schemaEditor/CollectionEditor.jsx) for example.
 
 A module in Celestial allows you to define multiple routes. Each module has a primary collection.  This lets you organize your routes logically according to function.
 
@@ -11,7 +11,7 @@ You can create data-driven app be defining one or more schemas and referencing t
 
 ##Demo
 
-You can try the demo app at [celestial.meteor.com](http://celestial.meteor.com/), or you can run it by cloning this repo and running `meteor`
+This is a simple "todo" demo.  It includes two flavors, a Data-driven example and a Programmatic example. You can try the demo app at [celestial.meteor.com](http://celestial.meteor.com/), or you can run it by cloning this repo and running `meteor`
 
 ##Data-driven example
 ```
@@ -32,9 +32,9 @@ Celestial.initModule(tasksApp);
 
 This automatically configures a route for each schema, plus a list route.
 
-The schemas can be configured/defiend by pointing your browser to /schema/list
+The schemas can be configured/defined by pointing your browser to `/schema/list`
 
-When you run this example, you can view/add tasks at /task-dd/list.  Note the default schemas for the example above are automatically created in bootstrap.jsx, and they are "locked" to prevent people playing with demo site from messing them up.
+When you run this example, you can view and add tasks at `/task-dd/list`.  Note the default schemas for the example above are automatically created in bootstrap.jsx, and they are "locked" to prevent people playing with demo site from messing them up.
 
 ##"Programmatic" example
 
